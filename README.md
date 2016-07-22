@@ -35,3 +35,9 @@ Get a given document in txt file format
 ##### `GET /publications?q={query}`
 
 Search within all publications
+
+
+## schema.org
+
+* https://schema.org/PublicationIssue
+* https://schema.org/PublicationVolume
