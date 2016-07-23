@@ -1,6 +1,16 @@
 # wbc.macbre.net
 
-WBC archive
+[WBC archive](http://www.wbc.poznan.pl/dlibra) served via API and as a SLA application.
+
+## Architecture
+
+Docker running the following:
+
+* SphinxSE instance
+* Redis as a caching layer
+* Flask-powered app providing HTTP API
+
+[`macbre/wbc`](https://github.com/macbre/wbc) can fetch and convert DJVU files to XML format that can be indexed by SphinxSE.
 
 ## API
 
