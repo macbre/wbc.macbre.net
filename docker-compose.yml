@@ -13,3 +13,16 @@ services:
       options:
         tag: sphinx
     hostname: sphinx-docker
+  # caching layer
+  redis:
+    build:
+      context: redis
+    ports:
+      - "56379:6379"
+    volumes:
+      - ./redis/data:/opt/redis
+    logging:
+      driver: syslog
+      options:
+        tag: redis
+    hostname: redis-docker
