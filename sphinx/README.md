@@ -14,6 +14,23 @@ mysql> show index wbc status;
 | disk_bytes        | 194896793 |
 +-------------------+-----------+
 5 rows in set (0.00 sec)
+
+mysql> desc wbc;
++----------------+--------+
+| Field          | Type   |
++----------------+--------+
+| id             | bigint |
+| title          | field  |
+| chapter        | field  |
+| content        | field  |
+| title          | string |
+| chapter        | string |
+| content        | string |
+| published_year | uint   |
+| publication_id | uint   |
+| document_id    | uint   |
++----------------+--------+
+10 rows in set (0.00 sec)
 ```
 
 ```sql
