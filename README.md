@@ -4,7 +4,7 @@
 
 ## Architecture
 
-Docker running the following:
+[Docker Compose](https://docs.docker.com/compose/install/#/install-docker-compose) running the following:
 
 * SphinxSE instance
 * Redis as a caching layer
