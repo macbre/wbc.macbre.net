@@ -6,12 +6,14 @@ from wbc.sphinx import get_sphinx
 
 
 class Search(MethodView):
+    # @see http://sphinxsearch.com/docs/current/api-func-buildexcerpts.html
+    # @see http://sphinxsearch.com/docs/current/sphinxql-call-snippets.html
     QUERY = """
 SELECT
     id,
-    SNIPPET(title, '{query}', 'limit=75') as name,
+    SNIPPET(title, '{query}', 'limit=150', 'around=15','before_match=<mark>', 'after_match=</mark>') as document_name,
     chapter,
-    SNIPPET(content, '{query}', 'limit=500') as snippet,
+    SNIPPET(content, '{query}', 'around=500', 'before_match=<mark>', 'after_match=</mark>') as snippet,
     published_year,
     publication_id,
     document_id
@@ -52,11 +54,29 @@ LIMIT 150
 
         for row in res:
             results.append({
-                'id': int(row['document_id']),
-                'publication': row['name'],
-                'chapter': row['chapter'],
+                'id': int(row['id']),
+                'name': row['chapter'],
+                '_links': {
+                    'self': {'href': '/documents/{}'.format(row['id'])}  # TODO - app.get_url
+                },
+                # the issue where this document is in
+                'issue': {
+                    'id': int(row['document_id']),
+                    'name': row['document_name'],
+                    'published_year': int(row['published_year']),
+                    '_links': {
+                        'self': {'href': '/issues/{}'.format(row['document_id'])}  # TODO - app.get_url
+                    },
+                },
+                # the publication where this issue is in
+                'publication': {
+                    'id': int(row['publication_id']),
+                    '_links': {
+                        'self': {'href': '/publications/{}'.format(row['publication_id'])}  # TODO - app.get_url
+                    },
+                },
+                # the document details
                 'snippet': row['snippet'],
-                'published_year': int(row['published_year']),
             })
 
         meta = sphinx.get_meta()
