@@ -42,7 +42,7 @@ Get a given document in txt file format
 
 ### Search
 
-##### `GET /publications?q={query}`
+##### `GET /search?q={query}`
 
 Search within all publications
 
