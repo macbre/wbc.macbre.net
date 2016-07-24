@@ -1,4 +1,4 @@
-from flask import jsonify, request
+from flask import jsonify, request, url_for
 from flask.views import MethodView
 
 from wbc.exceptions import WBCApiError
@@ -57,7 +57,7 @@ LIMIT 150
                 'id': int(row['id']),
                 'name': row['chapter'],
                 '_links': {
-                    'self': {'href': '/documents/{}'.format(row['id'])}  # TODO - app.get_url
+                    'self': {'href': url_for('documents', document_id=row['id'])}
                 },
                 # the issue where this document is in
                 'issue': {

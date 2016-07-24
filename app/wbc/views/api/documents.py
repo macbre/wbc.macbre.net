@@ -2,15 +2,20 @@ from flask import jsonify, request, make_response
 from flask.views import MethodView
 
 from wbc.exceptions import WBCApiError
-from wbc.sphinx import get_sphinx
+from wbc.models import DocumentModel
 
 
 class Document(MethodView):
-    def get(self, document_id):
+    @staticmethod
+    def get(document_id):
         """
         :type document_id int
         """
-        document = self._get_document(document_id)
+        document = DocumentModel.new_from_id(document_id)
+
+        # handle missing documents
+        if document is None:
+            raise WBCApiError('Document not found', 404)
 
         # handle text format
         txt_requested = request.path.endswith('.txt')
@@ -24,14 +29,3 @@ class Document(MethodView):
             'name': document['chapter'],
             'content': document['content'],
         })
-
-    @staticmethod
-    def _get_document(document_id):
-        sphinx = get_sphinx()
-
-        res = sphinx.query('SELECT title, chapter, content FROM wbc WHERE id = {}'.format(int(document_id)))
-
-        if len(res) != 1:
-            raise WBCApiError('Document not found', 404)
-
-        return res[0]
