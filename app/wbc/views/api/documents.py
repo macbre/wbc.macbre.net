@@ -11,7 +11,10 @@ class Document(MethodView):
         """
         :type document_id int
         """
-        document = DocumentModel.new_from_id(document_id)
+        try:
+            document = DocumentModel.new_from_id(document_id)
+        except Exception as e:
+            raise WBCApiError('Internal error: ' + str(e), 500)
 
         # handle missing documents
         if document is None:
