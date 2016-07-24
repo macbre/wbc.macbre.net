@@ -27,7 +27,7 @@ class Sphinx(object):
             self._connection = pymysql.Connect(
                 host=self._host,
                 port=self._port,
-                use_unicode=True,
+                charset='utf8',
                 connect_timeout=3,
                 cursorclass=pymysql.cursors.DictCursor,
             )
@@ -55,6 +55,19 @@ class Sphinx(object):
         """
         res = self.query('SHOW TABLES')
         return [row['Index'] for row in res]
+
+    def get_meta(self):
+        """
+        Return meta-data for the previous query
+        :type: dict
+        """
+        # @see http://sphinxsearch.com/docs/current/sphinxql-show-meta.html
+        res = self.query('SHOW META')
+
+        return {row['Variable_name']: row['Value'] for row in res}
+
+    def get_sphinx_version(self):
+        return 'Sphinx v{}'.format(self._connection.get_server_info())
 
 
 def get_sphinx():
