@@ -17,7 +17,7 @@ SELECT
     SNIPPET(content, '{query}', 'around=500', 'before_match=<mark>', 'after_match=</mark>') as snippet,
     published_year,
     publication_id,
-    document_id
+    document_id AS issue_id
 FROM wbc
 WHERE match('{query}*')
 ORDER BY published_year ASC
@@ -64,11 +64,11 @@ LIMIT 150
                 },
                 # the issue where this document is in
                 'issue': {
-                    'id': int(document['document_id']),
+                    'id': int(document['issue_id']),
                     'name': document['document_name'],
                     'published_year': int(document['published_year']),
                     '_links': {
-                        'self': {'href': '/issues/{}'.format(document['document_id'])}  # TODO - app.get_url
+                        'self': {'href': '/issues/{}'.format(document['issue_id'])}  # TODO - app.get_url
                     },
                 },
                 # the publication where this issue is in
