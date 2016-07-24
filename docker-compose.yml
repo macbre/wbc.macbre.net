@@ -26,3 +26,15 @@ services:
       options:
         tag: redis
     hostname: redis-docker
+  # Flask app
+  app:
+    build:
+      context: app
+    command: "server"
+    ports:
+    - "8080:8080"
+    logging:
+      driver: syslog
+      options:
+        tag: app
+    hostname: app-docker
