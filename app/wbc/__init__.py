@@ -1,8 +1,23 @@
-from flask import Flask
+from flask import Flask, jsonify
 
-from wbc.healthcheck import Healthcheck
+from wbc.exceptions import WBCApiError
+
+from wbc.views.healthcheck import Healthcheck
+from wbc.views.api.search import Search
 
 app = Flask(import_name=__name__)
 
-# add routes
+# healthcheck
 app.add_url_rule('/healthcheck', view_func=Healthcheck.as_view('healthcheck'))
+
+# API
+app.add_url_rule('/api/v1/search', view_func=Search.as_view('search'))
+
+
+# errors handling
+@app.errorhandler(WBCApiError)
+def handle_bad_api_request(e):
+    """
+    :type e WBCApiError
+    """
+    return jsonify({'error': True, 'message': e.get_message()}), e.get_response_code()
