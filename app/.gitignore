@@ -1,0 +1,9 @@
+*.egg-info/
+env*/
+build/
+dist/
+.idea/
+.cache/
+
+*.swp
+*.pyc
