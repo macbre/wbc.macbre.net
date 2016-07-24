@@ -2,6 +2,7 @@ from flask import jsonify, request, url_for
 from flask.views import MethodView
 
 from wbc.exceptions import WBCApiError
+from wbc.models import DocumentModel
 from wbc.sphinx import get_sphinx
 
 
@@ -53,30 +54,32 @@ LIMIT 150
         results = []
 
         for row in res:
+            document = DocumentModel(**row)
+
             results.append({
-                'id': int(row['id']),
-                'name': row['chapter'],
+                'id': int(document['id']),
+                'name': document['chapter'],
                 '_links': {
-                    'self': {'href': url_for('documents', document_id=row['id'])}
+                    'self': {'href': url_for('documents', document_id=document['id'])}
                 },
                 # the issue where this document is in
                 'issue': {
-                    'id': int(row['document_id']),
-                    'name': row['document_name'],
-                    'published_year': int(row['published_year']),
+                    'id': int(document['document_id']),
+                    'name': document['document_name'],
+                    'published_year': int(document['published_year']),
                     '_links': {
-                        'self': {'href': '/issues/{}'.format(row['document_id'])}  # TODO - app.get_url
+                        'self': {'href': '/issues/{}'.format(document['document_id'])}  # TODO - app.get_url
                     },
                 },
                 # the publication where this issue is in
                 'publication': {
-                    'id': int(row['publication_id']),
+                    'id': int(document['publication_id']),
                     '_links': {
-                        'self': {'href': '/publications/{}'.format(row['publication_id'])}  # TODO - app.get_url
+                        'self': {'href': '/publications/{}'.format(document['publication_id'])}  # TODO - app.get_url
                     },
                 },
                 # the document details
-                'snippet': row['snippet'],
+                'snippet': document['snippet'],
             })
 
         meta = sphinx.get_meta()
