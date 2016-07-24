@@ -44,7 +44,9 @@ LIMIT 150
         :type query str
         """
         sphinx = get_sphinx()
-        res = sphinx.query(self.QUERY.format(query=query).replace("\n", ' '))
+
+        query_escaped = sphinx.connection.escape_string(query)
+        res = sphinx.query(self.QUERY.format(query=query_escaped).replace("\n", ' '))
 
         results = []
 
