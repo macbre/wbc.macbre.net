@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 from wbc.exceptions import WBCApiError
 
@@ -28,3 +28,9 @@ def handle_bad_api_request(e):
             error=True,
             details=e.get_message()
     ), e.get_response_code()
+
+
+@app.errorhandler(404)
+def handle_not_found(e):
+    if request.path.startswith('/api'):
+        return handle_bad_api_request(WBCApiError('API end-point not found', 404))
