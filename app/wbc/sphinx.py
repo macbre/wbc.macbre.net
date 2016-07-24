@@ -67,14 +67,22 @@ class Sphinx(object):
         return {row['Variable_name']: row['Value'] for row in res}
 
     def get_sphinx_version(self):
+        """
+        Return Sphinx version string
+        :rtype: str
+        """
         return 'Sphinx v{}'.format(self._connection.get_server_info())
 
 
 def get_sphinx():
+    """
+    :rtype: Sphinx
+    """
+    from os import environ
+
     if not hasattr(g, '__sphinx'):
-        # TODO: customize values
         g.__sphinx = Sphinx(
-            host='127.0.0.1',
+            host=environ.get('SPHINX_HOST', 'sphinx'),
             port=36307
         )
 
