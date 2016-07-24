@@ -13,6 +13,7 @@ setup(
         'coverage==4.0.1',
         'flask==0.10.1',
         'monolog-python==0.1.0',
+        'PyMySQL==0.7.5',
         'pytest==2.8.2',
     ],
     include_package_data=True,
