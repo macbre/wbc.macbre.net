@@ -32,5 +32,9 @@ def handle_bad_api_request(e):
 
 @app.errorhandler(404)
 def handle_not_found(e):
+    # API requests - return error messages as JSON
     if request.path.startswith('/api'):
         return handle_bad_api_request(WBCApiError('API end-point not found', 404))
+    # emit HTML
+    else:
+        return '<strong>HTTP 404</strong> not found', 404
