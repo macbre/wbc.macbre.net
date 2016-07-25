@@ -1,4 +1,6 @@
-from flask import Flask, jsonify, request
+import os
+
+from flask import Flask, jsonify, request, send_from_directory
 
 from wbc.exceptions import WBCApiError
 
@@ -16,6 +18,13 @@ app.add_url_rule('/healthcheck', view_func=Healthcheck.as_view('healthcheck'))
 app.add_url_rule('/api/v1/documents/<int:document_id>', view_func=Document.as_view('documents'))
 app.add_url_rule('/api/v1/documents/<int:document_id>.txt', view_func=Document.as_view('documents.txt'))
 app.add_url_rule('/api/v1/search', view_func=Search.as_view('search'))
+
+
+# favicon
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 # errors handling
