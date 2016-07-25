@@ -1,23 +1,25 @@
 # Dockerfile for Flask-app
-FROM debian:jessie
+FROM python:3.4-alpine
 
-# use bash to have 'source' command
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+# Fix Searching for pytest==2.8.2
+# Reading https://pypi.python.org/simple/pytest/
+# Download error on https://pypi.python.org/simple/pytest/: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:600) -- Some packages may not be found!
+# Couldn't find index page for 'pytest' (maybe misspelled?)
+RUN apk --update upgrade && \
+    apk add curl ca-certificates && \
+    update-ca-certificates && \
+    rm -rf /var/cache/apk/*
 
-# install dependencies
-RUN apt-get update && apt-get install -y \
-	python3-minimal python3-pip virtualenv
+# install venv
+RUN pip install virtualenv
 
-# set timezone
-# @see http://unix.stackexchange.com/a/76711
-RUN cp /usr/share/zoneinfo/CET /etc/localtime && dpkg-reconfigure --frontend noninteractive tzdata
-
-RUN mkdir /opt/app
+RUN mkdir -pv /opt/app
 WORKDIR /opt/app
 ENV HOME /opt/app
 
 ADD . /opt/app
 
+# setup venv
 RUN virtualenv -p python3 env
 RUN source env/bin/activate
 RUN python3 setup.py install
