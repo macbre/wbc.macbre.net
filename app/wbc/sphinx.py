@@ -42,7 +42,7 @@ class Sphinx(object):
         :type args list
         :rtype: list
         """
-        self._logger.info('Query: {}'.format(query))
+        self._logger.debug('Query: {}'.format(query))
 
         with self.connection.cursor() as cursor:
             cursor.execute(query, args)
