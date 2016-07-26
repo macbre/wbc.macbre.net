@@ -7,6 +7,7 @@ from wbc.exceptions import WBCApiError
 from wbc.views.healthcheck import Healthcheck
 
 from wbc.views.api.documents import Document
+from wbc.views.api.issues import Issue
 from wbc.views.api.search import Search
 
 app = Flask(import_name=__name__)
@@ -17,6 +18,7 @@ app.add_url_rule('/healthcheck', view_func=Healthcheck.as_view('healthcheck'))
 # API
 app.add_url_rule('/api/v1/documents/<int:document_id>', view_func=Document.as_view('documents'))
 app.add_url_rule('/api/v1/documents/<int:document_id>.txt', view_func=Document.as_view('documents.txt'))
+app.add_url_rule('/api/v1/issues/<int:issue_id>', view_func=Issue.as_view('issues'))
 app.add_url_rule('/api/v1/search', view_func=Search.as_view('search'))
 
 

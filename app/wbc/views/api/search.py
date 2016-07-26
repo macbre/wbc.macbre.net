@@ -68,7 +68,7 @@ LIMIT 150
                     'name': document['document_name'],
                     'published_year': int(document['published_year']),
                     '_links': {
-                        'self': {'href': '/issues/{}'.format(document['issue_id'])}  # TODO - app.get_url
+                        'self': {'href': url_for('issues', issue_id=document['issue_id'])}
                     },
                 },
                 # the publication where this issue is in
