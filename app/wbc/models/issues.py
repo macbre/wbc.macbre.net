@@ -20,6 +20,3 @@ class IssuesModel(Model):
             return None
 
         return [DocumentModel(**row) for row in res]
-
-    def to_json(self):
-        raise NotImplementedError()

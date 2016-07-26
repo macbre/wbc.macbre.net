@@ -20,10 +20,3 @@ class DocumentModel(Model):
             return None
 
         return cls(**res[0])
-
-    def to_json(self):
-        return {
-            'id': int(self['id']),
-            'name': self['chapter'],
-            'content': self['content'],
-        }
