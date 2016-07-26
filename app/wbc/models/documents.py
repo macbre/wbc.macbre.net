@@ -11,7 +11,7 @@ class DocumentModel(Model):
         :rtype: Document
         """
         res = get_sphinx().query(
-                'SELECT title, document_id AS issue_id, chapter, content FROM wbc WHERE id = {}'.
+                'SELECT id, title, document_id AS issue_id, chapter, content FROM wbc WHERE id = {}'.
                 format(int(document_id))
         )
 
@@ -19,3 +19,10 @@ class DocumentModel(Model):
             return None
 
         return cls(**res[0])
+
+    def to_json(self):
+        return {
+            'id': int(self['id']),
+            'name': self['chapter'],
+            'content': self['content'],
+        }

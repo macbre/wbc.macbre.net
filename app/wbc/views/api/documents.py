@@ -27,8 +27,4 @@ class Document(MethodView):
             resp.headers['Content-Type'] = 'text/plain; charset=utf-8'
             return resp
 
-        return jsonify({
-            'id': int(document_id),
-            'name': document['chapter'],
-            'content': document['content'],
-        })
+        return jsonify(document.to_json())
