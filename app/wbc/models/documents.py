@@ -11,7 +11,8 @@ class DocumentModel(Model):
         :rtype: Document
         """
         res = get_sphinx().query(
-                'SELECT id, title, document_id AS issue_id, chapter, content FROM wbc WHERE id = {}'.
+                'SELECT id, title AS issue_name, document_id AS issue_id, published_year, chapter, content ' +
+                'FROM wbc WHERE id = {}'.
                 format(int(document_id))
         )
 
