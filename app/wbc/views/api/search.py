@@ -1,3 +1,5 @@
+import logging
+
 from flask import jsonify, request, url_for
 from flask.views import MethodView
 
@@ -6,7 +8,7 @@ from wbc.models import DocumentModel
 from wbc.sphinx import get_sphinx
 
 
-class Search(MethodView):
+class SearchableMixin(object):
     # @see http://sphinxsearch.com/docs/current/api-func-buildexcerpts.html
     # @see http://sphinxsearch.com/docs/current/sphinxql-call-snippets.html
     QUERY = """
@@ -24,15 +26,19 @@ ORDER BY published_year ASC
 LIMIT 150
 """
 
-    def get(self):
-        query = request.args.get('q', '').strip()
+    def __init__(self):
+        self._logging = logging.getLogger(self.__class__.__name__)
 
-        # validate queries
-        if query == '':
-            raise WBCApiError('Query string is empty, "q" URL parameter is missing', 400)
+    def search(self, **kwargs):
+        """
+        Perform a search and format the results
+
+        :param kwargs:
+        """
+        query = self._get_search_query()
 
         try:
-            results, stats = self._get_results(query)
+            results, stats = self._get_results(self._get_search_query(), **kwargs)
         except Exception as e:
             raise WBCApiError('Error while searching: {} {}'.format(e.__class__, str(e)))
 
@@ -42,11 +48,14 @@ LIMIT 150
             'stats': stats
         })
 
-    def _get_results(self, query):
+    def _get_results(self, query, **kwargs):
         """
         :type query str
+        :rtype: list
         """
         sphinx = get_sphinx()
+
+        self._logging.debug("Searching for '{}' (params: {})".format(query, kwargs))
 
         query_escaped = sphinx.connection.escape_string(query)
         res = sphinx.query(self.QUERY.format(query=query_escaped).replace("\n", ' '))
@@ -90,3 +99,30 @@ LIMIT 150
         }
 
         return results, stats
+
+    def is_searchable(self):
+        """
+        Checks if the current request has a proper "q" parameter
+
+        :rtype: bool
+        """
+        return self._get_search_query() != ''
+
+    @staticmethod
+    def _get_search_query():
+        """
+        Returns "q" parameter
+
+        :rtype: str
+        """
+        query = request.args.get('q', '').strip()
+        return query
+
+
+class Search(MethodView, SearchableMixin):
+    def get(self):
+        # validate queries
+        if not self.is_searchable():
+            raise WBCApiError('Query string is empty, "q" URL parameter is missing', 400)
+
+        return self.search()
