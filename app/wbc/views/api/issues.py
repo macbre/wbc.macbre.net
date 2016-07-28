@@ -3,11 +3,12 @@ from flask.views import MethodView
 
 from wbc.exceptions import WBCApiError
 from wbc.models import IssuesModel
+from wbc.views.api.search import SearchableMixin
 
 
-class Issue(MethodView):
-    @staticmethod
-    def get(issue_id):
+class Issue(MethodView, SearchableMixin):
+
+    def get(self, issue_id):
         """
         :type issue_id int
         """
@@ -19,6 +20,11 @@ class Issue(MethodView):
         # handle missing documents
         if documents is None:
             raise WBCApiError('Issue not found', 404)
+
+        # handle searching within an issue
+        # e.g. /api/v1/issues/168145?q=Kopiec
+        if self.is_searchable():
+            return self.search(issue_id=issue_id)
 
         issue = documents[0]
 

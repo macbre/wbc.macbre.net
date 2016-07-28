@@ -3,12 +3,13 @@ import logging
 from flask import jsonify, request, url_for
 from flask.views import MethodView
 
+from wbc.common import LoggableMixin
 from wbc.exceptions import WBCApiError
 from wbc.models import DocumentModel
 from wbc.sphinx import get_sphinx
 
 
-class SearchableMixin(object):
+class SearchableMixin(LoggableMixin):
     # @see http://sphinxsearch.com/docs/current/api-func-buildexcerpts.html
     # @see http://sphinxsearch.com/docs/current/sphinxql-call-snippets.html
     QUERY = """
@@ -21,24 +22,21 @@ SELECT
     publication_id,
     document_id AS issue_id
 FROM wbc
-WHERE match('{query}*')
+WHERE match('{query}*'){where}
 ORDER BY published_year ASC
 LIMIT 150
 """
 
-    def __init__(self):
-        self._logging = logging.getLogger(self.__class__.__name__)
-
-    def search(self, **kwargs):
+    def search(self, issue_id=None):
         """
         Perform a search and format the results
 
-        :param kwargs:
+        :type issue_id int
         """
         query = self._get_search_query()
 
         try:
-            results, stats = self._get_results(self._get_search_query(), **kwargs)
+            results, stats = self._get_results(self._get_search_query(), issue_id=issue_id)
         except Exception as e:
             raise WBCApiError('Error while searching: {} {}'.format(e.__class__, str(e)))
 
@@ -48,17 +46,25 @@ LIMIT 150
             'stats': stats
         })
 
-    def _get_results(self, query, **kwargs):
+    def _get_results(self, query, issue_id=None):
         """
         :type query str
+        :type issue_id int
         :rtype: list
         """
         sphinx = get_sphinx()
 
-        self._logging.debug("Searching for '{}' (params: {})".format(query, kwargs))
+        conditions = list(filter(None, [
+            'issue_id={}'.format(int(issue_id)) if issue_id is not None else ''
+        ]))
+
+        self._logging.debug("Searching for '{}' ({})".format(query, conditions))
 
         query_escaped = sphinx.connection.escape_string(query)
-        res = sphinx.query(self.QUERY.format(query=query_escaped).replace("\n", ' '))
+        res = sphinx.query(self.QUERY.format(
+            query=query_escaped.replace("\n", ' '),
+            where=' AND '.join([''] + conditions)
+        ))
 
         results = []
 
