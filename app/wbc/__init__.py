@@ -5,10 +5,7 @@ from flask import Flask, jsonify, request, send_from_directory
 from wbc.exceptions import WBCApiError
 
 from wbc.views.healthcheck import Healthcheck
-
-from wbc.views.api.documents import Document
-from wbc.views.api.issues import Issue
-from wbc.views.api.search import Search
+from wbc.views.api import Document, Issue, Search
 
 app = Flask(import_name=__name__)
 
@@ -42,7 +39,7 @@ def handle_bad_api_request(e):
 
 
 @app.errorhandler(404)
-def handle_not_found(e):
+def handle_not_found():
     # API requests - return error messages as JSON
     if request.path.startswith('/api'):
         return handle_bad_api_request(WBCApiError('API end-point not found', 404))
