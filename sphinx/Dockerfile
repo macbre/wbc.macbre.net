@@ -8,7 +8,9 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 # install dependencies
 RUN apt-get update && apt-get install -y wget
 
-RUN wget http://sphinxsearch.com/files/sphinxsearch_2.2.10-release-1~jessie_amd64.deb -O /tmp/sphinxsearch.deb
+ENV SPHINX_VERSION 2.2.11
+
+RUN wget http://sphinxsearch.com/files/sphinxsearch_${SPHINX_VERSION}-release-1~jessie_amd64.deb -O /tmp/sphinxsearch.deb
 RUN dpkg -i /tmp/sphinxsearch.deb || apt-get -f install -y
 
 # set timezone
