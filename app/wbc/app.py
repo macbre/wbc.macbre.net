@@ -1,10 +1,8 @@
-import logging
 from os import environ
 
 from . import app
+from . import is_debug
 
-is_debug = environ.get('DEBUG')
-logging.basicConfig(level=logging.DEBUG if is_debug else logging.INFO)
 
 app.run(
     debug=is_debug,

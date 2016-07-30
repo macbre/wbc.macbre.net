@@ -1,3 +1,4 @@
+import logging
 import os
 
 from flask import Flask, jsonify, request, send_from_directory
@@ -46,3 +47,8 @@ def handle_not_found(e):
     # emit HTML
     else:
         return '<strong>HTTP 404</strong> not found', 404
+
+
+# setup logging
+is_debug = os.environ.get('DEBUG')
+logging.basicConfig(level=logging.DEBUG if is_debug else logging.INFO)
