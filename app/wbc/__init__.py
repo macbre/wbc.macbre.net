@@ -1,7 +1,10 @@
 import logging
 import os
+import time
 
-from flask import Flask, jsonify, request, send_from_directory
+from socket import gethostname
+
+from flask import g, Flask, jsonify, request, send_from_directory
 
 from wbc.exceptions import WBCApiError
 
@@ -49,6 +52,23 @@ def handle_not_found(e):
     else:
         return '<strong>HTTP 404</strong> not found', 404
 
+
+# measure response time
+@app.before_request
+def app_before_request():
+    g.start = time.time()
+
+
+@app.after_request
+def app_after_request(response):
+    """
+    :type response flask.wrappers.ResponseBase
+    :rtype: flask.wrappers.ResponseBase
+    """
+    response.headers.set('X-Backend-Response-Time', '{:.4f}'.format(time.time() - g.start))
+    response.headers.set('X-Served-By', gethostname())
+
+    return response
 
 # setup logging
 is_debug = os.environ.get('DEBUG')
