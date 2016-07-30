@@ -15,6 +15,7 @@ setup(
         'monolog-python==0.1.0',
         'PyMySQL==0.7.5',
         'pytest==2.8.2',
+        'redis==2.10.5'
     ],
     include_package_data=True,
     entry_points={
