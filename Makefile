@@ -2,7 +2,7 @@ index:
 	zcat ../wbc/106644.xml.gz | docker-compose run sphinx indexer -c /opt/sphinx.conf --rotate wbc
 
 stopwords:
-	zcat ../wbc/106644.xml.gz | docker-compose run sphinx indexer wbc -c /opt/sphinx.conf --buildfreqs --buildstops /dev/stdout 100000 > words.txt
+	zcat ../wbc/106644.xml.gz | docker-compose run sphinx indexer wbc -c /opt/sphinx.conf --buildfreqs --buildstops /dev/stdout 250000 > stopwords.txt
 
 start:
 	docker-compose up -d
