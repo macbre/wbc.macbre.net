@@ -19,7 +19,8 @@ setup(
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            'server=wbc.app:start'
+            'server=wbc.app:start',
+            'stopwords=wbc.cli.stopwords:build'
         ],
     }
 )
