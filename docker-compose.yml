@@ -17,10 +17,8 @@ services:
   redis:
     build:
       context: redis3
-    #ports:
-    #  - "56379:6379"
     volumes:
-      - ./redis/data:/opt/redis
+      - ./redis3/data:/opt/redis
     logging:
       driver: syslog
       options:
