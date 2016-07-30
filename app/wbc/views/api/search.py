@@ -1,5 +1,3 @@
-import logging
-
 from flask import jsonify, request, url_for
 from flask.views import MethodView
 
