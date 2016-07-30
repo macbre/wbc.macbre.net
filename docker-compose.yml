@@ -16,7 +16,7 @@ services:
   # caching layer
   redis:
     build:
-      context: redis
+      context: redis3
     #ports:
     #  - "56379:6379"
     volumes:
