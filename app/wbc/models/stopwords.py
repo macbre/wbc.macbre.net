@@ -21,8 +21,27 @@ class StopWords(object):
         self.logger = logging.getLogger(self.__class__.__name__)
         self.redis = get_redis()
 
+    def suggest(self, query, limit=20):
+        """
+        :type query str
+        :type limit int
+        :rtype: list
+        """
+        # @see http://redis.io/commands/zrangebylex
+        r = self.redis.zrangebylex(
+            name=self.SET_NAME,
+            min='[{}'.format(query),
+            max='[{}\xff'.format(query),
+            start=0,
+            num=limit
+        )
+
+        return [item.decode('utf-8') for item in r]
+
     def index(self, stream):
         """
+        Index stopwords from given stream
+
         :type stream StringIO
         """
         count = 0

@@ -6,7 +6,7 @@ from flask import Flask, jsonify, request, send_from_directory
 from wbc.exceptions import WBCApiError
 
 from wbc.views.healthcheck import Healthcheck
-from wbc.views.api import Document, Issue, Search
+from wbc.views.api import Document, Issue, Search, Suggest
 
 app = Flask(import_name=__name__)
 
@@ -18,6 +18,7 @@ app.add_url_rule('/api/v1/documents/<int:document_id>', view_func=Document.as_vi
 app.add_url_rule('/api/v1/documents/<int:document_id>.txt', view_func=Document.as_view('documents.txt'))
 app.add_url_rule('/api/v1/issues/<int:issue_id>', view_func=Issue.as_view('issues'))
 app.add_url_rule('/api/v1/search', view_func=Search.as_view('search'))
+app.add_url_rule('/api/v1/suggest', view_func=Suggest.as_view('suggest'))
 
 
 # favicon
