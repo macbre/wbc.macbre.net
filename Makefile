@@ -3,6 +3,7 @@ index:
 
 stopwords:
 	zcat ../wbc/106644.xml.gz | docker-compose run sphinx indexer wbc -c /opt/sphinx.conf --buildfreqs --buildstops /dev/stdout 250000 > stopwords.txt
+	cat stopwords.txt | docker-compose run app stopwords
 
 start:
 	docker-compose up -d
