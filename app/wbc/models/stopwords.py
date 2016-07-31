@@ -59,6 +59,8 @@ class StopWords(object):
         then = time.time()
         self.logger.info('Indexing stopwords...')
 
+        self.redis.delete(self.SET_NAME)
+
         for batch in self._words(stream):
             self._index_batch(batch)
             count += len(batch)
@@ -66,10 +68,18 @@ class StopWords(object):
         self.logger.info('Indexed {} stopwords in {:.2f} sec'.format(count, time.time() - then))
 
     def _index_batch(self, batch):
+        """
+        :type batch list
+        """
         # @see http://redis.io/commands/ZADD
-        kwargs = {name: 0 for name, _ in batch}
+        args = []
 
-        self.redis.zadd(name=self.SET_NAME, **kwargs)
+        # As *args, in the form of: score1, name1, score2, name2, ...
+        for (word, _) in batch:
+            args.append(0)
+            args.append(word)
+
+        self.redis.zadd(self.SET_NAME, *args)
 
     def _words(self, stream):
         """
@@ -85,7 +95,7 @@ class StopWords(object):
             word = matches.group(1)
             freq = int(matches.group(2))
 
-            if self.is_valid_word(word, freq):
+            if not self.is_valid_word(word, freq):
                 continue
 
             batch.append((word, freq))
