@@ -13,13 +13,24 @@ class StopWords(object):
     LINE_REGEXP = re.compile(r'^(\w+) (\d+)$')  # line needs to end with a number
 
     WORD_MIN_LENGTH = 3
-    WORD_MIN_FREQ = 5
+    WORD_MIN_FREQ = 2
 
     WORDS_IN_BATCH = 50
 
+    _redis = None
+
     def __init__(self):
         self.logger = logging.getLogger(self.__class__.__name__)
-        self.redis = get_redis()
+
+    @property
+    def redis(self):
+        """
+        Lazy connect to Redis
+        """
+        if self._redis is None:
+            self._redis = get_redis()
+
+        return self._redis
 
     def suggest(self, query, limit=20):
         """
@@ -74,12 +85,7 @@ class StopWords(object):
             word = matches.group(1)
             freq = int(matches.group(2))
 
-            # skip too short words and not frequent enough
-            if len(word) < self.WORD_MIN_LENGTH or freq < self.WORD_MIN_FREQ:
-                continue
-
-            # skip words like "1957"
-            if word.isnumeric():
+            if self.is_valid_word(word, freq):
                 continue
 
             batch.append((word, freq))
@@ -92,3 +98,23 @@ class StopWords(object):
         # not emitted batch left
         if len(batch) > 0:
             yield(batch)
+
+    def is_valid_word(self, word, freq):
+        """
+        :type word str
+        :type freq int
+        :rtype: bool
+        """
+        # skip too short words and not frequent enough
+        if len(word) < self.WORD_MIN_LENGTH or freq < self.WORD_MIN_FREQ:
+            return False
+
+        # skip words like "1957"
+        if word.isnumeric():
+            return False
+
+        # skip words like "problemowo-dydaktycznej"
+        if '-' in word:
+            return False
+
+        return True
