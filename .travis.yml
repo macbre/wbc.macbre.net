@@ -1,0 +1,6 @@
+language: python
+python:
+  - "3.4"
+  - "3.5"
+install: cd app && python setup.py install
+script: make test # we're in app/ already
