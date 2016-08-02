@@ -1,4 +1,4 @@
-coverage_options = --omit='tests/*,env*/*,*__init__.py'
+coverage_options = --include='wbc/*' --omit='tests/*,env*/*,*__init__.py'
 
 test:
 	py.test -x tests/
