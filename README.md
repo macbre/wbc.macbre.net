@@ -14,6 +14,8 @@
 
 ## API
 
+> Needs to be prefixed with `/api/v1` (e.g. `/api/v1/search?q=foo`)
+
 ### Publications
 
 ##### `GET /publications`
@@ -46,6 +48,11 @@ Get a given document in txt file format
 
 Search within all publications
 
+### Suggest
+
+##### `GET /suggest?q={query}`
+
+Return [search suggestions](http://www.opensearch.org/Specifications/OpenSearch/Extensions/Suggestions/1.1)
 
 ## schema.org
 

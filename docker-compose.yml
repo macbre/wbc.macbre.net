@@ -16,13 +16,26 @@ services:
   # caching layer
   redis:
     build:
-      context: redis
-    ports:
-      - "56379:6379"
+      context: redis3
     volumes:
-      - ./redis/data:/opt/redis
+      - ./redis3/data:/opt/redis
     logging:
       driver: syslog
       options:
         tag: redis
     hostname: redis-docker
+  # Flask app
+  app:
+    build:
+      context: app
+    command: "server"
+    ports:
+    - "8080:8080"
+    links:
+    - sphinx
+    - redis
+    logging:
+      driver: syslog
+      options:
+        tag: app
+    hostname: app-docker
