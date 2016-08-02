@@ -1,5 +1,7 @@
 # wbc.macbre.net
 
+[![Build Status](https://travis-ci.org/macbre/wbc.macbre.net.svg?branch=master)](https://travis-ci.org/macbre/wbc.macbre.net)
+
 [WBC archive](http://www.wbc.poznan.pl/dlibra) served via API and as a SLA application.
 
 ## Architecture
