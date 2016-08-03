@@ -120,7 +120,7 @@ class StopWords(object):
             return False
 
         # skip words like "1957"
-        if word.isnumeric():
+        if word.isdigit():
             return False
 
         # skip words like "problemowo-dydaktycznej"
