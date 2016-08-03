@@ -2,9 +2,9 @@ from flask import jsonify, request, url_for
 from flask.views import MethodView
 
 from wbc.common import LoggableMixin
+from wbc.connectors import get_sphinx
 from wbc.exceptions import WBCApiError
 from wbc.models import DocumentModel
-from wbc.sphinx import get_sphinx
 
 
 class SearchableMixin(LoggableMixin):

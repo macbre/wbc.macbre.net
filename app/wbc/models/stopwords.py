@@ -4,7 +4,7 @@ import time
 
 from io import StringIO
 
-from wbc.redis import get_redis
+from wbc.connectors import get_redis
 
 
 class StopWords(object):
@@ -120,7 +120,7 @@ class StopWords(object):
             return False
 
         # skip words like "1957"
-        if word.isnumeric():
+        if word.isdigit():
             return False
 
         # skip words like "problemowo-dydaktycznej"

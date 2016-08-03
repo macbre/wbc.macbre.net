@@ -1,7 +1,6 @@
 import logging
 
 import pymysql
-from flask import g
 
 
 class Sphinx(object):
@@ -72,18 +71,3 @@ class Sphinx(object):
         :rtype: str
         """
         return 'Sphinx v{}'.format(self._connection.get_server_info())
-
-
-def get_sphinx():
-    """
-    :rtype: Sphinx
-    """
-    from os import environ
-
-    if not hasattr(g, '__sphinx'):
-        g.__sphinx = Sphinx(
-            host=environ.get('SPHINX_HOST', 'sphinx'),
-            port=36307
-        )
-
-    return g.__sphinx
