@@ -2,8 +2,7 @@ from flask import jsonify
 from flask.views import MethodView
 
 from wbc.exceptions import WBCApiError
-from wbc.redis import get_redis
-from wbc.sphinx import get_sphinx
+from wbc.connectors import get_redis, get_sphinx
 
 
 class Healthcheck(MethodView):

@@ -4,7 +4,7 @@ import time
 
 from io import StringIO
 
-from wbc.redis import get_redis
+from wbc.connectors import get_redis
 
 
 class StopWords(object):

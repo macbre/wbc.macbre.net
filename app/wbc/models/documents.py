@@ -1,6 +1,6 @@
 from . import Model
 
-from wbc.sphinx import get_sphinx
+from wbc.connectors import get_sphinx
 
 
 class DocumentModel(Model):
