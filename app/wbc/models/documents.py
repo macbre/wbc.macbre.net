@@ -40,7 +40,6 @@ class DocumentModel(Model):
         :rtype: str
         """
         name = self['chapter'].lower()
-        assert isinstance(name, str)
 
         name = remove_accents(name)
         name = re.sub(r'[^a-z0-9]+', '-', name).strip('-')
@@ -53,8 +52,6 @@ class DocumentModel(Model):
         """
         title = self['chapter']
         content = self['content']
-
-        assert isinstance(content, str)
 
         # remove repeated title in the content
         if content.startswith(title):

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import unittest
 
 from wbc import app
@@ -8,14 +9,14 @@ class DocumentModelTest(unittest.TestCase):
     def setUp(self):
         self.model = DocumentModel(**{
             'id': 6224,
-            'chapter': 'POWSTANIE WIELKOPOLSKIE NA POCZTÓWKACH, PLAKATACH, DYPLOMACH I ULOTKACH (DO 1921 R.)',
+            'chapter': u'POWSTANIE WIELKOPOLSKIE NA POCZTÓWKACH, PLAKATACH, DYPLOMACH I ULOTKACH (DO 1921 R.)',
             'content': 'foo\n\n\n\nbar'
         })
 
     def test_accessor(self):
         assert self.model['id'] == 6224
         assert self.model['chapter'] == \
-            'POWSTANIE WIELKOPOLSKIE NA POCZTÓWKACH, PLAKATACH, DYPLOMACH I ULOTKACH (DO 1921 R.)'
+            u'POWSTANIE WIELKOPOLSKIE NA POCZTÓWKACH, PLAKATACH, DYPLOMACH I ULOTKACH (DO 1921 R.)'
 
     def test_get_full_url(self):
         with app.test_request_context():
