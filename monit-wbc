@@ -1,0 +1,7 @@
+# @see http://mmonit.com/monit/documentation/monit.html#HTTP
+
+check host wbc with address 0.0.0.0
+	if failed
+		port 8080 protocol http
+		request "/healthcheck"
+	then alert
