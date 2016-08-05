@@ -45,7 +45,8 @@ class Issue(MethodView, SearchableMixin):
                     'id': int(document['id']),
                     'name': document['chapter'],
                     '_links': {
-                        'self': {'href': url_for('documents', document_id=document['id'])}
+                        'self': {'href': url_for('documents', document_id=document['id'])},
+                        'html': {'href': document.get_full_url()},
                     },
                 }
                 for document in documents
