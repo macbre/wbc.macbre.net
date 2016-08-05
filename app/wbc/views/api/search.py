@@ -73,7 +73,8 @@ LIMIT 150
                 'id': int(document['id']),
                 'name': document['chapter'],
                 '_links': {
-                    'self': {'href': url_for('documents', document_id=document['id'])}
+                    'self': {'href': url_for('documents', document_id=document['id'])},
+                    'html': {'href': document.get_full_url()},
                 },
                 # the issue where this document is in
                 'issue': {
