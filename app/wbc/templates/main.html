@@ -17,10 +17,25 @@
     {% endblock %}{% block head_extra %}{% endblock %}
   </head>
   <body>
+    <nav id="search">
+      <div class="container">
+        <form>
+          <div class="row">
+            <input class="u-full-width" type="text" placeholder="Szukaj na wbc.macbre.net" id="q" />
+          </div>
+        </form>
+      </div>
+    </nav>
     <div class="container">{% block content %}{% endblock %}</div>
 
     <footer>
-        <p class="container">Materiały dostępne w serwisie pochodzą z <a href="http://www.wbc.poznan.pl">Wielkopolskiej Bibliotece Cyfrowej</a>, gdzie opublikowane zostały z prawem dostępu dla wszystkich w zakresie dozwolonego użytku.</p>
+      <div class="container">
+        <p>Materiały dostępne w serwisie pochodzą z <a href="http://www.wbc.poznan.pl">Wielkopolskiej Bibliotece Cyfrowej</a>, gdzie opublikowane zostały z prawem dostępu dla wszystkich w zakresie dozwolonego użytku.</p>
+        <div class="row">
+          <p class="six columns">Napędzane przez Python, Flask, Redis i SphinxSE</p>
+          <p class="six columns" style="text-align: right"><a href="https://github.com/macbre/wbc.macbre.net">GitHub</a></p>
+        </div>
+      </div>
     </footer>
   </body>
   <script src="//code.jquery.com/jquery-3.0.0.min.js"></script>
