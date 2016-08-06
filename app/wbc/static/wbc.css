@@ -1,5 +1,13 @@
+body {
+    border-top: solid 2px #006cb0;
+}
+
+article {
+    margin: 3em 0;
+}
+
 article h3 {
-    color: #666;
+    color: #006cb0;
     border-top: solid 1px #aaa;
     font-size: 1em;
     font-weight: bold;
@@ -13,4 +21,20 @@ article h3 span {
     position: relative;
     top: -0.6em;
     padding: 0 1em;
+}
+
+article .legal {
+    color: #666;
+    display: block;
+    margin: 5em 0;
+}
+
+footer {
+    background-color: #006cb0;
+    color: #fff;
+    padding: 3em 0;
+}
+
+footer a {
+    color: #fff !important;
 }

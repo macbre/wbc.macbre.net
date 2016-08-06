@@ -25,6 +25,8 @@ class DocumentHTML(MethodView):
             'issue_name': document['issue_name'],
             'title': document['chapter'],
             'content': document.get_html_content(),
+            'djvu_url': document.get_djvu_url(),
+            'full_url': document.get_full_url(),
         }
 
         return render_template('document.html', **kwargs)

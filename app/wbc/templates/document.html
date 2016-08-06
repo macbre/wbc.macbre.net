@@ -1,9 +1,16 @@
 {% extends "main.html" %}
 {% block title %}{{ title }}{% endblock %}
+{% block head_extra %}
+    <link rel="canonical" href="{{ full_url }}" />
+    <link rel="alternate" type="image/vnd.djvu" title="DJVu" href="{{ djvu_url }}" />
+{% endblock %}
 {% block content %}
 <article itemscope itemtype="http://schema.org/PublicationIssue">
     <h1 itemprop="name">{{ title }}</h1>
     <h3 itemprop="isPartOf" itemscope itemtype="http://schema.org/Periodical"><span>{{ issue_name }}</span></h3>
 {{ content | safe }}
+
+    <cite class="legal">Powyższy artykuł jest częścią publikacji <strong><a href="{{ djvu_url }}">{{ issue_name }}</a></strong> dostępnej w <a href="http://www.wbc.poznan.pl">Wielkopolskiej Bibliotece Cyfrowej</a> dla wszystkich w zakresie dozwolonego użytku.
+    Właścicielem praw jest <a href="http://www.poznan.pl/mim/wm/">Wydawnictwo Miejskie w Poznaniu</a>.</cite>
 </article>
 {% endblock %}

@@ -46,6 +46,12 @@ class DocumentModel(Model):
 
         return url_for('documents.html', document_id=self['id'], name=name)
 
+    def get_djvu_url(self):
+        """
+        :rtype: str
+        """
+        return 'http://www.wbc.poznan.pl/dlibra/doccontent?id={}'.format(self['issue_id'])
+
     def get_html_content(self):
         """
         :rtype: str
