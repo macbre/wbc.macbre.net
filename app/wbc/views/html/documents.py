@@ -1,7 +1,7 @@
-from flask import render_template
+from flask import render_template, redirect
 from flask.views import MethodView
 
-from wbc.exceptions import WBCApiError
+from wbc.exceptions import WBCHtmlError
 from wbc.models import DocumentModel
 
 
@@ -15,11 +15,15 @@ class DocumentHTML(MethodView):
         try:
             document = DocumentModel.new_from_id(document_id)
         except Exception as e:
-            raise WBCApiError('Internal error: ' + str(e), 500)
+            raise WBCHtmlError(u'Wystąpił błąd wewnętrzny: ' + str(e), 500)
 
         # handle missing documents
         if document is None:
-            raise WBCApiError('Document not found', 404)
+            raise WBCHtmlError(u'Podany dokument nie został znaleziony', 404)
+
+        # redirect to a canonical URL
+        if name is None:
+            return redirect(document.get_full_url(), code=301)  # 301 Moved Permanently
 
         kwargs = {
             'issue_name': document['issue_name'],

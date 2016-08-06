@@ -18,3 +18,7 @@ class WBCError(Exception):
 
 class WBCApiError(WBCError):
     pass
+
+
+class WBCHtmlError(WBCError):
+    pass

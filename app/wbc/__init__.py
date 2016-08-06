@@ -6,7 +6,7 @@ from socket import gethostname
 
 from flask import g, Flask, jsonify, request, send_from_directory
 
-from wbc.exceptions import WBCApiError
+from wbc.exceptions import WBCApiError, WBCHtmlError
 
 from wbc.views.healthcheck import Healthcheck
 from wbc.views.api import Document, Issue, Search, Suggest
@@ -38,14 +38,23 @@ def favicon():
 
 # errors handling
 @app.errorhandler(WBCApiError)
-def handle_bad_api_request(e):
+def handle_bad_html_request(e):
     """
-    :type e WBCApiError
+    :type e WBCHtmlError
     """
     return jsonify(
             error=True,
             details=e.get_message()
     ), e.get_response_code()
+
+
+# errors handling
+@app.errorhandler(WBCHtmlError)
+def handle_bad_api_request(e):
+    """
+    :type e WBCApiError
+    """
+    return '<strong>HTTP {}</strong> {}'.format(e.get_response_code(), e.get_message()), e.get_response_code()
 
 
 @app.errorhandler(404)
