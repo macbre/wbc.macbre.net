@@ -6,7 +6,7 @@ $(function() {
 
     field.autoComplete({
         source: function(term, response){
-            $.getJSON(url, { q: term }, function(data) {
+            $.getJSON(url, { q: term.toLowerCase() }, function(data) {
                 response(data[1].slice(0, 10));
             });
         },
