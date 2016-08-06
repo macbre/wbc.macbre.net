@@ -1,4 +1,9 @@
-<h1>{{ title }}</h1>
-<h3>{{ issue_name }}</h3>
-
+{% extends "main.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<article itemscope itemtype="http://schema.org/PublicationIssue">
+    <h1 itemprop="name">{{ title }}</h1>
+    <h3 itemprop="isPartOf" itemscope itemtype="http://schema.org/Periodical"><span>{{ issue_name }}</span></h3>
 {{ content | safe }}
+</article>
+{% endblock %}

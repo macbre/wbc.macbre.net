@@ -1,0 +1,16 @@
+article h3 {
+    color: #666;
+    border-top: solid 1px #aaa;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    margin: 2em 5%;
+}
+
+article h3 span {
+    background: #fff;
+    display: inline-block;
+    position: relative;
+    top: -0.6em;
+    padding: 0 1em;
+}

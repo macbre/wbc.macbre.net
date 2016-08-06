@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    {% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+
+    <!-- TODO: minify + combine -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='wbc.css') }}">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <title>{% block title %}{% endblock %} | wbc.macbre.net</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div class="container">{% block content %}{% endblock %}</div>
+    <footer>
+    </footer>
+  </body>
+  <script src="//code.jquery.com/jquery-3.0.0.min.js"></script>
+</html>
