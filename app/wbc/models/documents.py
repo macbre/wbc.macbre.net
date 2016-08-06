@@ -52,6 +52,18 @@ class DocumentModel(Model):
         """
         return 'http://www.wbc.poznan.pl/dlibra/doccontent?id={}'.format(self['issue_id'])
 
+    def get_txt_url(self):
+        """
+        :rtype: str
+        """
+        return url_for('documents.txt', document_id=self['id'])
+
+    def get_json_url(self):
+        """
+        :rtype: str
+        """
+        return url_for('documents', document_id=self['id'])
+
     def get_html_content(self):
         """
         :rtype: str

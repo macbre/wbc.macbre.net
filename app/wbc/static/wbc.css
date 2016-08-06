@@ -58,6 +58,16 @@ article h3 span {
     max-width: 65%;
 }
 
+article .toolbox {
+    text-align: center;
+    margin: 2.5em 0;
+}
+
+article .toolbox a {
+    display: inline-block;
+    margin: 0.5em 1em;
+}
+
 article cite {
     color: #666;
     display: block;

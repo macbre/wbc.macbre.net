@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import render_template, redirect
+from flask import render_template, redirect, url_for
 from flask.views import MethodView
 
 from wbc.exceptions import WBCHtmlError
@@ -32,6 +32,8 @@ class DocumentHTML(MethodView):
             'content': document.get_html_content(),
             'djvu_url': document.get_djvu_url(),
             'full_url': document.get_full_url(),
+            'txt_url': document.get_txt_url(),
+            'json_url': document.get_json_url(),
         }
 
         return render_template('document.html', **kwargs)
