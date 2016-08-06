@@ -10,10 +10,32 @@ body {
 #search form {
     margin: 0;
     padding: 1em 0;
+    position: relative;
 }
 
 #search input {
     margin: 0;
+}
+
+.autocomplete-suggestions {
+    background: #fff;
+    position: absolute;
+    border: solid 1px #aaa;
+    box-sizing: border-box;
+}
+
+.autocomplete-suggestion {
+    padding: 7px 2px;
+    margin: 0px 3px;
+    border-bottom: solid 1px #ddd;
+}
+
+.autocomplete-suggestion:last-child {
+    border: none;
+}
+
+.autocomplete-suggestion.selected {
+    color: #006cb0;
 }
 
 article {

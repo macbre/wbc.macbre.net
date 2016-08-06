@@ -38,5 +38,12 @@
       </div>
     </footer>
   </body>
+  <script>
+    var _g = {
+      "suggest_url": "{{ url_for('suggest') }}"
+    };
+  </script>
   <script src="//code.jquery.com/jquery-3.0.0.min.js"></script>
+  <script src="{{ url_for('static', filename='jquery.auto-complete.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='wbc.js') }}"></script>
 </html>
