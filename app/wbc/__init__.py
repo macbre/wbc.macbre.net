@@ -10,7 +10,7 @@ from wbc.exceptions import WBCApiError, WBCHtmlError
 
 from wbc.views.healthcheck import Healthcheck
 from wbc.views.api import Document, Issue, Search, Suggest
-from wbc.views.html import DocumentHTML
+from wbc.views.html import DocumentHTML, SearchHTML
 
 app = Flask(import_name=__name__)
 
@@ -27,6 +27,8 @@ app.add_url_rule('/api/v1/suggest', view_func=Suggest.as_view('suggest'))
 # HTML
 app.add_url_rule('/document/<int:document_id>.html', view_func=DocumentHTML.as_view('documents-short.html'))
 app.add_url_rule('/document/<int:document_id>/<string:name>.html', view_func=DocumentHTML.as_view('documents.html'))
+
+app.add_url_rule('/search', view_func=SearchHTML.as_view('search.html'))
 
 
 # favicon

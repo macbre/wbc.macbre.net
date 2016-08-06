@@ -1,0 +1,19 @@
+{% extends "main.html" %}
+{% block title %}{{ query }} - Szukaj{% endblock %}
+{% block content %}
+<article>
+<h1>Wyniki wyszukiwania dla <em>{{ query }}</em></h1>
+
+<ul class="search-results">
+{% for result in results %}
+  <li>
+    <h2><a href="{{ result['_links']['html']['href'] }}">{{ result['name'] }}</a></h2>
+    <h4>{{ result['issue']['name'] | safe }}</h4>
+    <blockquote>{{ result['snippet'] | safe }}</blockquote>
+  </li>
+{% endfor %}
+</ul>
+
+<cite>Znaleziono {{ stats['total'] }} pozycji w czasie {{ stats['took'] }} sek.</cite>
+</article>
+{% endblock %}

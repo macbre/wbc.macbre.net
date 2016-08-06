@@ -11,7 +11,7 @@ $(function() {
             });
         },
         onSelect: function() {
-            $('#search').submit();
+            $('#search form').submit();
         }
     });
 });
