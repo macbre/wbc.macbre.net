@@ -4,7 +4,7 @@ import time
 
 from socket import gethostname
 
-from flask import g, Flask, jsonify, request, send_from_directory
+from flask import g, Flask, jsonify, request, send_from_directory, render_template
 
 from wbc.exceptions import WBCApiError, WBCHtmlError
 
@@ -40,9 +40,9 @@ def favicon():
 
 # errors handling
 @app.errorhandler(WBCApiError)
-def handle_bad_html_request(e):
+def handle_bad_api_request(e):
     """
-    :type e WBCHtmlError
+    :type e WBCApiError
     """
     return jsonify(
             error=True,
@@ -52,11 +52,11 @@ def handle_bad_html_request(e):
 
 # errors handling
 @app.errorhandler(WBCHtmlError)
-def handle_bad_api_request(e):
+def handle_bad_html_request(e):
     """
-    :type e WBCApiError
+    :type e WBCHtmlError
     """
-    return '<strong>HTTP {}</strong> {}'.format(e.get_response_code(), e.get_message()), e.get_response_code()
+    return render_template('error.html', message=e.get_message(), code=e.get_response_code()), e.get_response_code()
 
 
 @app.errorhandler(404)

@@ -102,6 +102,11 @@ article cite {
     padding: 3px;
 }
 
+.error {
+    text-align: center;
+    min-height: 600px;
+}
+
 footer {
     background-color: #006cb0;
     color: #fff;
