@@ -8,6 +8,7 @@
 <article itemscope itemtype="http://schema.org/PublicationIssue">
     <h1 itemprop="name">{{ title }}</h1>
     <h3 itemprop="isPartOf" itemscope itemtype="http://schema.org/Periodical"><span>{{ issue_name }}</span></h3>
+    <meta itemprop="datePublished" content="{{ published_year }}-01-01">
 
     <nav class="toolbox">
         <a class="button" href="{{ djvu_url }}">Wersja DjVu</a>

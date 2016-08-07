@@ -29,6 +29,7 @@ class DocumentHTML(MethodView):
         kwargs = {
             'issue_name': document['issue_name'],
             'title': document['chapter'],
+            'published_year': document['published_year'],
             'content': document.get_html_content(),
             'djvu_url': document.get_djvu_url(),
             'full_url': document.get_full_url(),
