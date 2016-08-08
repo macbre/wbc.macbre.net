@@ -16,7 +16,7 @@
     <title>{% block title %}{% endblock %} | wbc.macbre.net</title>
     {% endblock %}{% block head_extra %}{% endblock %}
   </head>
-  <body>
+  <body{% block body_attrs %}{% endblock %}>
     <nav id="search">
       <div class="container">
         <form action="{{ url_for('search.html') }}">

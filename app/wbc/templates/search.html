@@ -1,6 +1,7 @@
 {% extends "main.html" %}
 {% block title %}{{ query }} - Szukaj{% endblock %}
 {% block search_query %} value="{{ query }}"{% endblock %}
+{% block body_attrs %} class="search"{% endblock %}
 {% block content %}
 <article>
 <h1>Wyniki wyszukiwania dla <em>{{ query }}</em></h1>
