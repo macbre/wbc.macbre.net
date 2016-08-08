@@ -15,6 +15,7 @@
 
 #search input {
     margin: 0;
+    opacity: 0.9;
 }
 
 .autocomplete-suggestions {
@@ -23,6 +24,7 @@
     position: absolute;
     border: solid 1px #aaa;
     box-sizing: border-box;
+    opacity: 0.95;
 }
 
 .autocomplete-suggestion {
