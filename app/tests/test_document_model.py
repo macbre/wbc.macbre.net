@@ -15,7 +15,7 @@ class DocumentModelTest(unittest.TestCase):
             'id': 6224,
             'issue_id': 123,
             'chapter': chapter,
-            'content': chapter + 'foo\n\n\n\nbar'
+            'content': chapter + 'foo\n\n\n\n<bar>'
         })
 
     def test_accessor(self):
@@ -39,7 +39,7 @@ class DocumentModelTest(unittest.TestCase):
 
     def test_get_html_content(self):
         assert self.model.get_html_content() == \
-                '<p>foo</p>\n\n<p>bar</p>'
+                '<p>foo</p>\n\n<p>&lt;bar&gt;</p>'
 
     @staticmethod
     def test_new_from_id():

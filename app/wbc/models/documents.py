@@ -1,6 +1,11 @@
 import re
 import unicodedata
 
+try:
+    from html import escape  # Python 3.x
+except ImportError:
+    from cgi import escape  # Python 2.7
+
 from flask import url_for
 from . import Model
 
@@ -82,6 +87,9 @@ class DocumentModel(Model):
 
             if line == '':
                 continue
+
+            # be safe
+            line = escape(line)
 
             parts.append(line)
 
