@@ -22,4 +22,4 @@ ADD . /opt/app
 # setup venv
 RUN virtualenv -p python3 env
 RUN source env/bin/activate
-RUN python3 setup.py install
+RUN pip install -e .

@@ -31,6 +31,8 @@ services:
     command: "server"
     ports:
     - "8080:8080"
+    environment:
+      GIT_HASH: "${GIT_HASH}"
     links:
     - sphinx
     - redis

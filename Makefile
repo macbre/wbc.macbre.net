@@ -6,6 +6,7 @@ stopwords:
 	cat stopwords.txt | docker-compose run app stopwords
 
 start:
+	GIT_HASH=`git rev-parse HEAD` \
 	docker-compose up -d
 
 stop:
