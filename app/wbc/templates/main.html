@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
-
-    <!-- TODO: minify + combine -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/wbc.css') }}">
-
+{% assets "css" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}" />
+{% endassets %}
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 
     <title>{% block title %}{% endblock %} | wbc.macbre.net</title>
@@ -43,7 +40,7 @@
       "suggest_url": "{{ url_for('suggest') }}"
     };
   </script>
-  <script src="//code.jquery.com/jquery-3.0.0.min.js"></script>
-  <script src="{{ url_for('static', filename='js/jquery.auto-complete.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/wbc.js') }}"></script>
+  <script src="//code.jquery.com/jquery-3.0.0.min.js"></script>{% assets "js" %}
+  <script src="{{ ASSET_URL }}"></script>
+{% endassets %}
 </html>
