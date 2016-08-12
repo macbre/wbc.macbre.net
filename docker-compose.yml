@@ -28,9 +28,11 @@ services:
   app:
     build:
       context: app
-    command: "server"
+    command: "gunicorn wbc:app -b 0.0.0.0:8080 --access-logfile -"
     ports:
     - "8080:8080"
+    environment:
+      GIT_HASH: "${GIT_HASH}"
     links:
     - sphinx
     - redis
@@ -38,4 +40,4 @@ services:
       driver: syslog
       options:
         tag: app
-    hostname: app-docker
+    hostname: "app-docker-${HOST}"

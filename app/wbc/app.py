@@ -1,11 +1,11 @@
 from os import environ
 
-from . import app
-from . import is_debug
+from . import app, is_debug
 
 
-app.run(
-    debug=is_debug,
-    host='0.0.0.0',
-    port=environ.get('SERVER_PORT', 8080)
-)
+def start():
+    app.run(
+        debug=is_debug,
+        host='0.0.0.0',
+        port=environ.get('SERVER_PORT', 8080)
+    )

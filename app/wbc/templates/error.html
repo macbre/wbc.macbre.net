@@ -1,0 +1,8 @@
+{% extends "main.html" %}
+{% block title %}{{ message }}{% endblock %}
+{% block content %}
+<article class="error">
+    <h1>{{ code }}</h1>
+    <h3><span>{{ message }}</span></h3>
+</article>
+{% endblock %}

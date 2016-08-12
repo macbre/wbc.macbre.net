@@ -4,24 +4,43 @@
     {% block head %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
-
-    <!-- TODO: minify + combine -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='wbc.css') }}">
-
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+{% assets "css" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}" />
+{% endassets %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 
     <title>{% block title %}{% endblock %} | wbc.macbre.net</title>
     {% endblock %}{% block head_extra %}{% endblock %}
   </head>
-  <body>
-    <div class="container">{% block content %}{% endblock %}</div>
+  <body{% block body_attrs %}{% endblock %}>
+    <nav id="search">
+      <div class="container">
+        <form action="{{ url_for('search.html') }}">
+          <div class="row">
+            <input class="u-full-width" type="text" placeholder="Szukaj na wbc.macbre.net" name="q"{% block search_query %}{% endblock %} />
+          </div>
+        </form>
+      </div>
+    </nav>
+    <div class="container" id="main">{% block content %}{% endblock %}</div>
 
     <footer>
-        <p class="container">Materiały dostępne w serwisie pochodzą z <a href="http://www.wbc.poznan.pl">Wielkopolskiej Bibliotece Cyfrowej</a>, gdzie opublikowane zostały z prawem dostępu dla wszystkich w zakresie dozwolonego użytku.</p>
+      <div class="container">
+        <p>Materiały dostępne w serwisie pochodzą z <a href="http://www.wbc.poznan.pl">Wielkopolskiej Biblioteki Cyfrowej</a>, gdzie opublikowane zostały z prawem dostępu dla wszystkich w zakresie dozwolonego użytku.</p>
+        <div class="row">
+          <p class="six columns">Napędzane przez Python, Flask, Redis i SphinxSE</p>
+          <p class="six columns" style="text-align: right"><tt>$ <a href="https://github.com/macbre/wbc.macbre.net">git</a> rev-parse HEAD &raquo; {{ get_app_version() }}</tt></p>
+        </div>
+      </div>
     </footer>
   </body>
-  <script src="//code.jquery.com/jquery-3.0.0.min.js"></script>
+  <script>
+    var _g = {
+      "suggest_url": "{{ url_for('suggest') }}"
+    };
+  </script>
+  <script src="//code.jquery.com/jquery-3.0.0.min.js"></script>{% assets "js" %}
+  <script src="{{ ASSET_URL }}"></script>
+{% endassets %}
 </html>

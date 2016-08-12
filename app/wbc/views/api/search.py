@@ -15,7 +15,7 @@ SELECT
     id,
     SNIPPET(title, '{query}', 'limit=150', 'around=15','before_match=<mark>', 'after_match=</mark>') as document_name,
     chapter,
-    SNIPPET(content, '{query}', 'around=500', 'before_match=<mark>', 'after_match=</mark>') as snippet,
+    SNIPPET(content, '{query}', 'limit=300', 'around=85', 'before_match=<mark>', 'after_match=</mark>') as snippet,
     published_year,
     publication_id,
     document_id AS issue_id

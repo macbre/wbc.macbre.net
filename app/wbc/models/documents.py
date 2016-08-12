@@ -1,6 +1,11 @@
 import re
 import unicodedata
 
+try:
+    from html import escape  # Python 3.x
+except ImportError:
+    from cgi import escape  # Python 2.7
+
 from flask import url_for
 from . import Model
 
@@ -52,6 +57,18 @@ class DocumentModel(Model):
         """
         return 'http://www.wbc.poznan.pl/dlibra/doccontent?id={}'.format(self['issue_id'])
 
+    def get_txt_url(self):
+        """
+        :rtype: str
+        """
+        return url_for('documents.txt', document_id=self['id'])
+
+    def get_json_url(self):
+        """
+        :rtype: str
+        """
+        return url_for('documents', document_id=self['id'])
+
     def get_html_content(self):
         """
         :rtype: str
@@ -70,6 +87,9 @@ class DocumentModel(Model):
 
             if line == '':
                 continue
+
+            # be safe
+            line = escape(line)
 
             parts.append(line)
 

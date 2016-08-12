@@ -4,13 +4,17 @@ import time
 
 from socket import gethostname
 
-from flask import g, Flask, jsonify, request, send_from_directory
+from flask import g, Flask, jsonify, request, send_from_directory, render_template
+from werkzeug.contrib.fixers import ProxyFix
 
-from wbc.exceptions import WBCApiError
+from wbc.exceptions import WBCApiError, WBCHtmlError
 
 from wbc.views.healthcheck import Healthcheck
 from wbc.views.api import Document, Issue, Search, Suggest
-from wbc.views.html import DocumentHTML
+from wbc.views.html import DocumentHTML, SearchHTML
+
+from .assets import register_assets
+from .common import get_app_version
 
 app = Flask(import_name=__name__)
 
@@ -28,12 +32,14 @@ app.add_url_rule('/api/v1/suggest', view_func=Suggest.as_view('suggest'))
 app.add_url_rule('/document/<int:document_id>.html', view_func=DocumentHTML.as_view('documents-short.html'))
 app.add_url_rule('/document/<int:document_id>/<string:name>.html', view_func=DocumentHTML.as_view('documents.html'))
 
+app.add_url_rule('/search', view_func=SearchHTML.as_view('search.html'))
+
 
 # favicon
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
-                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+                               'img/favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 # errors handling
@@ -46,6 +52,15 @@ def handle_bad_api_request(e):
             error=True,
             details=e.get_message()
     ), e.get_response_code()
+
+
+# errors handling
+@app.errorhandler(WBCHtmlError)
+def handle_bad_html_request(e):
+    """
+    :type e WBCHtmlError
+    """
+    return render_template('error.html', message=e.get_message(), code=e.get_response_code()), e.get_response_code()
 
 
 @app.errorhandler(404)
@@ -78,3 +93,13 @@ def app_after_request(response):
 # setup logging
 is_debug = os.environ.get('DEBUG')
 logging.basicConfig(level=logging.DEBUG if is_debug else logging.INFO)
+
+# emit git hash and register a helper function for templates
+app.logger.info('{} is now running using code {}'.format(app.name, get_app_version()))
+app.jinja_env.globals.update(get_app_version=get_app_version)
+
+# register assets
+register_assets(app)
+
+# ProxyFix
+app.wsgi_app = ProxyFix(app.wsgi_app)

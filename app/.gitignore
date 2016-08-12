@@ -7,3 +7,6 @@ dist/
 
 *.swp
 *.pyc
+
+wbc/static/*.min.css
+wbc/static/*.min.js
