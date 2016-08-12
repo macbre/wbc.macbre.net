@@ -10,8 +10,10 @@ app.jinja_env.globals.update(get_app_version=get_app_version)
 
 register_assets(app)
 
-app.run(
-    debug=is_debug,
-    host='0.0.0.0',
-    port=environ.get('SERVER_PORT', 8080)
-)
+
+def start():
+    app.run(
+        debug=is_debug,
+        host='0.0.0.0',
+        port=environ.get('SERVER_PORT', 8080)
+    )
