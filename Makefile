@@ -7,6 +7,7 @@ stopwords:
 
 start:
 	GIT_HASH=`git rev-parse HEAD` \
+	HOST=`hostname` \
 	docker-compose up -d
 
 stop:
