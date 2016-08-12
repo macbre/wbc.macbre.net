@@ -5,12 +5,16 @@ import time
 from socket import gethostname
 
 from flask import g, Flask, jsonify, request, send_from_directory, render_template
+from werkzeug.contrib.fixers import ProxyFix
 
 from wbc.exceptions import WBCApiError, WBCHtmlError
 
 from wbc.views.healthcheck import Healthcheck
 from wbc.views.api import Document, Issue, Search, Suggest
 from wbc.views.html import DocumentHTML, SearchHTML
+
+from .assets import register_assets
+from .common import get_app_version
 
 app = Flask(import_name=__name__)
 
@@ -89,3 +93,13 @@ def app_after_request(response):
 # setup logging
 is_debug = os.environ.get('DEBUG')
 logging.basicConfig(level=logging.DEBUG if is_debug else logging.INFO)
+
+# emit git hash and register a helper function for templates
+app.logger.info('{} is now running using code {}'.format(app.name, get_app_version()))
+app.jinja_env.globals.update(get_app_version=get_app_version)
+
+# register assets
+register_assets(app)
+
+# ProxyFix
+app.wsgi_app = ProxyFix(app.wsgi_app)
