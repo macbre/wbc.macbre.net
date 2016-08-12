@@ -12,7 +12,7 @@ bundles = {
     'js': Bundle(
         'js/jquery.auto-complete.min.js',
         'js/wbc.js',
-        output='wbc.min.js',
+        output='wbc.%(version)s.min.js',
         filters='jsmin'
     ),
 
@@ -20,7 +20,7 @@ bundles = {
         'css/normalize.css',
         'css/skeleton.css',
         'css/wbc.css',
-        output='wbc.min.css',
+        output='wbc.%(version)s.min.css',
         filters='cssmin'
     ),
 }
