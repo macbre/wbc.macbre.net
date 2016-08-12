@@ -5,7 +5,7 @@ services:
       context: sphinx
     command: "searchd --nodetach --config /opt/sphinx.conf"
     ports:
-    - "36307:36307"
+    - "127.0.0.1:36307:36307"
     volumes:
     - ./sphinx/data:/opt/sphinx/index
     logging:
@@ -29,8 +29,6 @@ services:
     build:
       context: app
     command: "gunicorn wbc:app -b 0.0.0.0:8080 --access-logfile -"
-    ports:
-    - "8080:8080"
     environment:
       GIT_HASH: "${GIT_HASH}"
     links:
@@ -41,3 +39,17 @@ services:
       options:
         tag: app
     hostname: "app-docker-${HOST}"
+  # nginx proxy
+  nginx:
+    build:
+      context: nginx
+    command: "nginx -g 'daemon off;'"
+    ports:
+    - "80:80"
+    links:
+    - app
+    logging:
+      driver: syslog
+      options:
+        tag: nginx
+    hostname: "nginx-docker-${HOST}"
