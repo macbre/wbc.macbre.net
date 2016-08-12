@@ -7,11 +7,11 @@
     <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
 
     <!-- TODO: minify + combine -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='wbc.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/wbc.css') }}">
 
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 
     <title>{% block title %}{% endblock %} | wbc.macbre.net</title>
     {% endblock %}{% block head_extra %}{% endblock %}
@@ -44,6 +44,6 @@
     };
   </script>
   <script src="//code.jquery.com/jquery-3.0.0.min.js"></script>
-  <script src="{{ url_for('static', filename='jquery.auto-complete.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='wbc.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.auto-complete.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/wbc.js') }}"></script>
 </html>
