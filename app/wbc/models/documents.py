@@ -27,7 +27,7 @@ class DocumentModel(Model):
     def new_from_id(cls, document_id):
         """
         :type document_id int
-        :rtype: Document
+        :rtype: DocumentModel
         """
         res = get_sphinx().query(
                 'SELECT id, title AS issue_name, document_id AS issue_id, published_year, chapter, content ' +
@@ -95,3 +95,16 @@ class DocumentModel(Model):
 
         # return HTML-formatted content
         return '<p>{}</p>'.format('</p>\n\n<p>'.join(parts))
+
+    def get_cite(self):
+        """
+        :rtype: str
+        """
+        # extract issue no
+        # Kronika Miasta Poznania 2009 Nr2; Okupacja 1
+        # ... Poznania 1960.01/06 R.28 Nr1/2
+        m = re.search(r'\sNr([\d/]+)', self['issue_name'])
+        issue_no = m.group(1).replace('/', '-') if m else None
+
+        return u'{{{{KMP|{issue_no}/{year}|rozdział={chapter}}}}}'.\
+            format(issue_no=issue_no, year=self['published_year'], chapter=str(self['chapter']).lower())

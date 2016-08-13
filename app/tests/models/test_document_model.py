@@ -4,7 +4,7 @@ import unittest
 from wbc import app
 from wbc.models import DocumentModel
 
-from .helpers import get_sphinx_mock
+from ..helpers import get_sphinx_mock
 
 
 class DocumentModelTest(unittest.TestCase):
