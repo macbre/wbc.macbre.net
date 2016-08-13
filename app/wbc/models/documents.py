@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import re
 import unicodedata
 
@@ -107,4 +108,4 @@ class DocumentModel(Model):
         issue_no = m.group(1).replace('/', '-') if m else None
 
         return u'{{{{KMP|{issue_no}/{year}|rozdział={chapter}}}}}'.\
-            format(issue_no=issue_no, year=self['published_year'], chapter=str(self['chapter']).lower())
+            format(issue_no=issue_no, year=self['published_year'], chapter=self['chapter'].lower())
