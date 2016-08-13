@@ -99,7 +99,11 @@ def app_after_request(response):
 
 # setup logging
 is_debug = os.environ.get('DEBUG')
-logging.basicConfig(level=logging.DEBUG if is_debug else logging.INFO)
+logging.basicConfig(
+    level=logging.DEBUG if is_debug else logging.INFO,
+    format='%(asctime)s %(name)-25s %(levelname)-8s %(message)s',
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
 
 # emit git hash and register a helper function for templates
 app.logger.info('{} is now running using code {}'.format(app.name, get_app_version()))

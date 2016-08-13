@@ -28,6 +28,8 @@ class Sphinx(object):
                 port=self._port,
                 charset='utf8',
                 connect_timeout=3,
+                read_timeout=3,
+                write_timeout=3,
                 cursorclass=pymysql.cursors.DictCursor,
             )
 
@@ -41,7 +43,7 @@ class Sphinx(object):
         :type args list
         :rtype: list
         """
-        self._logger.debug('Query: {}'.format(query))
+        self._logger.debug('Query: {}'.format(query.replace("\n", ' ')))
 
         with self.connection.cursor() as cursor:
             cursor.execute(query, args)
