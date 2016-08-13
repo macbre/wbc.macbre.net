@@ -14,4 +14,9 @@ $(function() {
             $('#search form').submit();
         }
     });
+
+    // auto-select cite box
+    $('input.cite').on('click', function(ev) {
+        $(this).select()
+    });
 });

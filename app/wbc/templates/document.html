@@ -20,5 +20,10 @@
 
     <cite class="legal">Powyższy artykuł jest częścią publikacji <strong><a href="{{ djvu_url }}">{{ issue_name }}</a></strong> dostępnej w <a href="http://www.wbc.poznan.pl">Wielkopolskiej Bibliotece Cyfrowej</a> dla wszystkich w zakresie dozwolonego użytku.
     Właścicielem praw jest <a href="http://www.poznan.pl/mim/wm/">Wydawnictwo Miejskie w Poznaniu</a>.</cite>
+
+    <form class="row">
+        <label>Cytuj na wiki</label>
+        <input type="text" class="u-full-width cite" readonly value="&lt;ref&gt;{{ cite }}&lt;/ref&gt;" />
+    </form>
 </article>
 {% endblock %}

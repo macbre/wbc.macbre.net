@@ -82,6 +82,11 @@ article cite {
     margin: 5em 0;
 }
 
+article input.cite {
+    background: #fafafa;
+    font-family: monospace;
+}
+
 /*********************************************************************************************************
  * SEARCH
  */
@@ -149,7 +154,7 @@ footer a {
         line-height: 1.3;
     }
 
-    nav, footer {
+    nav, footer, form {
         display: none;
     }
 
