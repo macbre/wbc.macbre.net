@@ -36,9 +36,12 @@ app.add_url_rule('/search', view_func=SearchHTML.as_view('search.html'))
 
 
 # favicon
+root_path = app.root_path
+
+
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),
+    return send_from_directory(os.path.join(root_path, 'static'),
                                'img/favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
