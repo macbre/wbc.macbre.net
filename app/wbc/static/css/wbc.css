@@ -137,7 +137,7 @@ body.search {
  * FOOTER
  */
 footer {
-    background-color: #006cb0;
+    background: #006cb0 url('/static/img/koziolek.png') no-repeat right bottom;
     border-bottom: solid 4px #008be3;
     color: #fff;
     padding: 3em 0;
