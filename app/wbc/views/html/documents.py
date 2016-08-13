@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, make_response
 from flask.views import MethodView
 
+from wbc.common import get_app_version
 from wbc.exceptions import WBCHtmlError
 from wbc.models import DocumentModel
 
@@ -38,4 +39,7 @@ class DocumentHTML(MethodView):
             'json_url': document.get_json_url(),
         }
 
-        return render_template('document.html', **kwargs)
+        resp = make_response(render_template('document.html', **kwargs))
+
+        resp.set_etag('{}-{}-{}'.format(document_id, document['published_year'], get_app_version()))
+        return resp

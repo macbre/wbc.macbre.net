@@ -18,6 +18,10 @@ from .common import get_app_version
 
 app = Flask(import_name=__name__)
 
+# config
+# @see http://stackoverflow.com/a/37331139/5446110
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 365 * 86400  # a year
+
 # healthcheck
 app.add_url_rule('/healthcheck', view_func=Healthcheck.as_view('healthcheck'))
 
