@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import render_template, redirect, make_response
+from flask import render_template, redirect, make_response, request
 from flask.views import MethodView
 
 from wbc.common import get_app_version
@@ -41,5 +41,8 @@ class DocumentHTML(MethodView):
 
         resp = make_response(render_template('document.html', **kwargs))
 
-        resp.set_etag('{}-{}-{}'.format(document_id, document['published_year'], get_app_version()))
+        resp.set_etag('{}-{}-{}'.format(document_id, document['published_year'], get_app_version()), weak=True)
+        resp.headers['Cache-Control'] = 'public, max-age=0'
+
+        resp.make_conditional(request)
         return resp
