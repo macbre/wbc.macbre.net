@@ -29,18 +29,18 @@
       <div class="container">
         <p>Materiały dostępne w serwisie pochodzą z <a href="http://www.wbc.poznan.pl">Wielkopolskiej Biblioteki Cyfrowej</a>, gdzie opublikowane zostały z prawem dostępu dla wszystkich w zakresie dozwolonego użytku.</p>
         <div class="row">
-          <p class="six columns">Napędzane przez Python, Flask, Redis i SphinxSE</p>
-          <p class="six columns" style="text-align: right"><tt>$ <a href="https://github.com/macbre/wbc.macbre.net">git</a> rev-parse HEAD &raquo; {{ get_app_version() }}</tt></p>
+          <p class="six columns">Napędzane przez zespół w składzie: Docker, Python, Flask, Redis, SphinxSE, Monit oraz kilka elektronów, tej</p>
+          <p class="six columns git-info">$ <a href="https://github.com/macbre/wbc.macbre.net">git</a> rev-parse HEAD &raquo; {{ get_app_version() }}</p>
         </div>
       </div>
     </footer>
-  </body>
-  <script>
+    <script>
     var _g = {
       "suggest_url": "{{ url_for('suggest') }}"
     };
-  </script>
-  <script src="//code.jquery.com/jquery-3.0.0.min.js"></script>{% assets "js" %}
-  <script src="{{ ASSET_URL }}"></script>
+    </script>
+    <script src="//code.jquery.com/jquery-3.0.0.min.js"></script>{% assets "js" %}
+    <script src="{{ ASSET_URL }}"></script>
 {% endassets %}
+  </body>
 </html>

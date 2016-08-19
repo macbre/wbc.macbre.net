@@ -148,6 +148,11 @@ footer a {
     color: #fff !important;
 }
 
+footer .git-info {
+    font-family: monospace;
+    text-align: right;
+}
+
 @media print {
     body {
         font: 12pt Georgia, "Times New Roman", Times, serif;
