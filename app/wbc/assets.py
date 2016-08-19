@@ -12,6 +12,7 @@ bundles = {
     'js': Bundle(
         'js/jquery.auto-complete.min.js',
         'js/wbc.js',
+        'js/back-to-top.js',
         output='wbc.%(version)s.min.js',
         filters='jsmin'
     ),
