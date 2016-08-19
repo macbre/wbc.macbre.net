@@ -5,13 +5,13 @@ services:
       context: sphinx
     command: "searchd --nodetach --config /opt/sphinx.conf"
     ports:
-    - "127.0.0.1:36307:36307"
+    - "127.0.0.1:36307:36307" # bind to local interface only!
     volumes:
     - ./sphinx/data:/opt/sphinx/index
     logging:
       driver: syslog
       options:
-        tag: sphinx
+        tag: wbc-sphinx
     hostname: sphinx-docker
   # caching layer
   redis:
@@ -22,7 +22,7 @@ services:
     logging:
       driver: syslog
       options:
-        tag: redis
+        tag: wbc-redis
     hostname: redis-docker
   # Flask app
   app:
@@ -37,7 +37,7 @@ services:
     logging:
       driver: syslog
       options:
-        tag: app
+        tag: wbc-app
     hostname: "app-docker-${HOST}"
   # nginx proxy
   nginx:
@@ -51,5 +51,5 @@ services:
     logging:
       driver: syslog
       options:
-        tag: nginx
+        tag: wbc-nginx
     hostname: "nginx-docker-${HOST}"
