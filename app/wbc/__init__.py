@@ -86,6 +86,9 @@ def app_before_request():
     g.start = time.time()
 
 
+hostname = gethostname()  # cache to avoid uname syscall on each request
+
+
 @app.after_request
 def app_after_request(response):
     """
@@ -93,7 +96,7 @@ def app_after_request(response):
     :rtype: flask.wrappers.ResponseBase
     """
     response.headers.set('X-Backend-Response-Time', '{:.4f}'.format(time.time() - g.start))
-    response.headers.set('X-Served-By', gethostname())
+    response.headers.set('X-Served-By', hostname)
 
     return response
 

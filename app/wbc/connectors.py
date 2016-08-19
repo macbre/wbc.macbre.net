@@ -36,6 +36,6 @@ def get_redis():
         )
 
         logger = logging.getLogger('get_redis')
-        logger.info('Connected to {}'.format(g.__redis))
+        logger.debug('Connected to {}'.format(g.__redis))
 
     return g.__redis
