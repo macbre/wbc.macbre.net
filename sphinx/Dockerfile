@@ -22,6 +22,7 @@ RUN mkdir -pv /opt/sphinx/log /opt/sphinx/index/wbc
 
 # redirect logs to stdout
 RUN ln -sv /dev/stdout /opt/sphinx/log/query.log
+RUN ln -sv /dev/stdout /opt/sphinx/log/searchd.log
 
 # home dir
 ENV HOME /opt/sphinx
