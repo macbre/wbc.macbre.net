@@ -14,7 +14,7 @@ services:
       options:
         tag: wbc-sphinx
     hostname: sphinx-docker
-  # caching layer
+  # used for search suggestions
   redis:
     build:
       context: redis3
@@ -45,6 +45,8 @@ services:
     build:
       context: nginx
     command: "nginx -g 'daemon off;'"
+    volumes:
+      - ./nginx/cache:/var/nginx/cache
     ports:
     - "80:80"
     links:
