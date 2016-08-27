@@ -8,6 +8,9 @@ COPY gzip.conf /etc/nginx/conf.d/
 # copy the site config file
 COPY site.conf /etc/nginx/conf.d/
 
+# caching
+COPY caching.conf /etc/nginx/conf.d/
+
 # redirect errors and access log
 RUN rm -f /var/log/nginx/*
 RUN ln -s /dev/stderr /var/log/nginx/error.log
