@@ -11,7 +11,7 @@ from wbc.exceptions import WBCApiError, WBCHtmlError
 
 from wbc.views.healthcheck import Healthcheck
 from wbc.views.api import Document, Issue, Search, Suggest
-from wbc.views.html import DocumentHTML, SearchHTML
+from wbc.views.html import DocumentHTML, HomeHTML, SearchHTML
 
 from .assets import register_assets
 from .common import get_app_version
@@ -33,6 +33,8 @@ app.add_url_rule('/api/v1/search', view_func=Search.as_view('search'))
 app.add_url_rule('/api/v1/suggest', view_func=Suggest.as_view('suggest'))
 
 # HTML
+app.add_url_rule('/', view_func=HomeHTML.as_view('home.html'))
+
 app.add_url_rule('/document/<int:document_id>.html', view_func=DocumentHTML.as_view('documents-short.html'))
 app.add_url_rule('/document/<int:document_id>/<string:name>.html', view_func=DocumentHTML.as_view('documents.html'))
 

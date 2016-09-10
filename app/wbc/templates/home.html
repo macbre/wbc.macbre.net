@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+{% block title %}Start{% endblock %}
+{% block content %}
+<article>
+    <h1>wbc.macbre.net</h1>
+    <p>Celem projektu jest stworzenie łatwego dostępu do tekstowej wersji dokumentów udostępnionych
+    w <a href="http://www.wbc.poznan.pl">Wielkopolskiej Biblioteki Cyfrowej</a>, gdzie opublikowane zostały
+    z prawem dostępu dla wszystkich w zakresie dozwolonego użytku.</p>
+
+    <p>Skorzystaj z wyszukiwarki dostępnej na pasku nawigacyjnym serwisu na górze strony.</p>
+
+    <p>Każdy dokument dostępny w serwisie mozna wyeksportować do wersji tekstowej lub podejrzeć w oryginalnym
+    <a href="https://pl.wikipedia.org/wiki/DjVu">formacie DjVu</a> na stronie
+    <a href="http://www.wbc.poznan.pl">Wielkopolskiej Biblioteki Cyfrowej</a>.</p>
+
+    <h2>Statystyki</h2>
+    <ul>
+        <li><strong>{{ stats.documents }}</strong> zaindeksowanych dokumentów</li>
+        <li><strong>{{ stats.mbytes }} MB</strong> tekstu</li>
+    </ul>
+</article>
+{% endblock %}
