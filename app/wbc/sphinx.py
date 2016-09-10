@@ -60,11 +60,33 @@ class Sphinx(object):
     def get_meta(self):
         """
         Return meta-data for the previous query
-        :type: dict
+        :rtype: dict
         """
         # @see http://sphinxsearch.com/docs/current/sphinxql-show-meta.html
         res = self.query('SHOW META')
 
+        return {row['Variable_name']: row['Value'] for row in res}
+
+    def get_index_meta(self, index_name):
+        """
+        Return meta-data for a given index
+
+mysql> show index wbc status;
++-------------------+-----------+
+| Variable_name     | Value     |
++-------------------+-----------+
+| index_type        | disk      |
+| indexed_documents | 6965      |
+| indexed_bytes     | 122364117 |
+| ram_bytes         | 131733889 |
+| disk_bytes        | 194437182 |
++-------------------+-----------+
+5 rows in set (0.00 sec)
+
+        :type index_name str
+        :rtype: dict
+        """
+        res = self.query('SHOW INDEX {} STATUS'.format(index_name))
         return {row['Variable_name']: row['Value'] for row in res}
 
     def get_sphinx_version(self):
