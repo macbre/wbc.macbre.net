@@ -54,7 +54,7 @@ def favicon():
 # robots.txt and sitemaps
 @app.route('/robots.txt')
 def robots():
-    return send_from_directory(os.path.join(root_path, 'sitemap'),
+    return send_from_directory(os.path.join(root_path, 'static'),
                                filename='robots.txt', mimetype='text/plain', cache_timeout=86400)
 
 
