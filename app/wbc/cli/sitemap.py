@@ -172,7 +172,7 @@ def get_urls(server_name):
 
             for row in rows:
                 document = DocumentModel(**row)
-                yield document.get_full_url(), '{}-01-01'.format(document['published_year'])  # YYYY-DD-MM
+                yield document.get_full_url(), '{}-01-01'.format(document['published_year'])  # YYYY-MM-DD
 
             # query for a next batch
             offset += batch
@@ -181,4 +181,4 @@ def get_urls(server_name):
 def build():
     with SitemapGenerator(directory=app.root_path + '/sitemap', http_path='http://wbc.macbre.net') as sitemap:
         for url, lastmod in get_urls(server_name='wbc.macbre.net'):
-            sitemap.add_item(url, lastmod)
+            sitemap.add_item(url)
