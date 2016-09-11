@@ -37,6 +37,17 @@ class DocumentModelTest(unittest.TestCase):
             assert self.model.get_txt_url() == \
                 '/api/v1/documents/6224.txt'
 
+    def test_long_urls(self):
+        with app.test_request_context():
+            model = DocumentModel(**{
+                'id': 6224,
+                'issue_id': 123,
+                'chapter': 'foobar' * 1024,
+            })
+
+            assert model.get_full_url() == \
+                '/document/6224/foobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoob.html'
+
     def test_get_html_content(self):
         assert self.model.get_html_content() == \
                 '<p>foo</p>\n\n<p>&lt;bar&gt;</p>'

@@ -48,7 +48,7 @@ class DocumentModel(Model):
         name = self['chapter'].lower()
 
         name = remove_accents(name)
-        name = re.sub(r'[^a-z0-9]+', '-', name).strip('-')
+        name = re.sub(r'[^a-z0-9]+', '-', name)[0:100].strip('-')
 
         return url_for('documents.html', document_id=self['id'], name=name)
 
