@@ -56,7 +56,7 @@ LIMIT 150
             'issue_id={}'.format(int(issue_id)) if issue_id is not None else ''
         ]))
 
-        self._logging.debug("Searching for '{}' ({})".format(query, conditions))
+        self._logger.debug("Searching for '{}' ({})".format(query, conditions))
 
         query_escaped = sphinx.connection.escape_string(query)
         res = sphinx.query(self.QUERY.format(
