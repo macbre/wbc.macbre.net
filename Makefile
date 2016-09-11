@@ -5,6 +5,10 @@ stopwords:
 	zcat ../wbc/106644.xml.gz | docker-compose run sphinx indexer wbc -c /opt/sphinx.conf --buildfreqs --buildstops /dev/stdout 250000 > stopwords.txt
 	cat stopwords.txt | docker-compose run app stopwords
 
+sitemap:
+	docker-compose run app sitemap
+	curl 'http://google.com/ping?sitemap=http://wbc.macbre.net/sitemap.xml' -svo /dev/null
+
 start:
 	GIT_HASH=`git rev-parse HEAD` \
 	HOST=`hostname` \
