@@ -11,3 +11,4 @@ dist/
 wbc/static/*.min.css
 wbc/static/*.min.js
 wbc/sitemap/sitemap-*.xml
+sitemap/
