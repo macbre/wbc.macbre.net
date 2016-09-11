@@ -48,7 +48,27 @@ root_path = app.root_path
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(root_path, 'static'),
-                               'img/favicon.ico', mimetype='image/vnd.microsoft.icon')
+                               filename='img/favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+
+# robots.txt and sitemaps
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory(os.path.join(root_path, 'sitemap'),
+                               filename='robots.txt', mimetype='text/plain', cache_timeout=86400)
+
+
+# @see http://flask.pocoo.org/snippets/57/
+@app.route('/sitemap.xml', defaults={'sitemap_id': 'index'})
+@app.route('/sitemap-<string:sitemap_id>.xml')
+def sitemap(sitemap_id):
+    """
+    :type sitemap_id str
+    :rtype: flask.wrappers.ResponseBase
+    """
+    return send_from_directory(os.path.join(root_path, 'sitemap'),
+                               filename='sitemap-{}.xml'.format(sitemap_id),
+                               mimetype='text/xml', cache_timeout=86400, add_etags=False)
 
 
 # errors handling
