@@ -42,7 +42,7 @@ class DocumentModelTest(unittest.TestCase):
             model = DocumentModel(**{
                 'id': 6224,
                 'issue_id': 123,
-                'chapter': 'foobar' * 1024,
+                'chapter': u'foobar' * 1024,
             })
 
             assert model.get_full_url() == \
