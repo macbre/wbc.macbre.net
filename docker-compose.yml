@@ -30,6 +30,8 @@ services:
     build:
       context: app
     command: "gunicorn wbc:app -b 0.0.0.0:8080 --access-logfile -"
+    volumes:
+    - ./app/sitemap:/opt/app/wbc/sitemap
     environment:
       GIT_HASH: "${GIT_HASH}"
     links:
