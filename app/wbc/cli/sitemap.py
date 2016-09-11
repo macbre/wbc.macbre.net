@@ -172,7 +172,7 @@ def get_urls(server_name):
 
             for row in rows:
                 document = DocumentModel(**row)
-                yield document.get_full_url(), str(document['published_year'])  # YYYY
+                yield document.get_full_url(), '{}-01-01'.format(document['published_year'])  # YYYY-DD-MM
 
             # query for a next batch
             offset += batch
