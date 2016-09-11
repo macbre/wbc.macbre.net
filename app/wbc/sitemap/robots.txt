@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://wbc.macbre.net/sitemap.xml
