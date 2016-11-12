@@ -18,8 +18,7 @@ setup(
         'gunicorn==19.6.0',
         'monolog-python==0.1.0',
         'PyMySQL==0.7.6',
-        'pytest==2.9.2',
-        'redis==2.10.5'
+        'pytest==2.9.2'
     ],
     include_package_data=True,
     entry_points={

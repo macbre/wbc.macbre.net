@@ -1,7 +1,4 @@
-import logging
-
 from flask import g
-from redis import StrictRedis
 
 from .sphinx import Sphinx
 
@@ -19,23 +16,3 @@ def get_sphinx():
         )
 
     return g.__sphinx
-
-
-def get_redis():
-    """
-    :rtype: StrictRedis
-    """
-    # @see https://pypi.python.org/pypi/redis
-    from os import environ
-
-    if not hasattr(g, '__redis'):
-        g.__redis = StrictRedis(
-            host=environ.get('REDIS_HOST', 'redis'),
-            port=6379,
-            db=0
-        )
-
-        logger = logging.getLogger('get_redis')
-        logger.debug('Connected to {}'.format(g.__redis))
-
-    return g.__redis
