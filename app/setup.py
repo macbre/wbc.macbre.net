@@ -25,7 +25,6 @@ setup(
     entry_points={
         'console_scripts': [
             'server=wbc.app:start',
-            'stopwords=wbc.cli.stopwords:build',
             'sitemap=wbc.cli.sitemap:build'
         ],
     }
