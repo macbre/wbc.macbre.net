@@ -2,8 +2,9 @@ from flask import jsonify
 from flask.views import MethodView
 
 from wbc.exceptions import WBCApiError
-from wbc.models import StopWords
 from wbc.views.api.search import SearchableMixin
+
+from wbc.connectors import get_sphinx
 
 
 class Suggest(MethodView, SearchableMixin):
@@ -14,8 +15,15 @@ class Suggest(MethodView, SearchableMixin):
 
         query = self._get_search_query()
 
+        # http://sphinxsearch.com/blog/2016/10/03/2-3-2-feature-built-in-suggests/
         try:
-            suggestions = StopWords().suggest(query)
+            suggestions = get_sphinx().call_suggest(
+                query=query,
+                index=SearchableMixin.INDEX,
+                limit=20,
+                max_edits=15,
+                delta_len=8,
+            )
         except Exception as e:
             raise WBCApiError('Error while getting suggestions: {} {}'.format(e.__class__, str(e)))
 

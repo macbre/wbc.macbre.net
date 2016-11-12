@@ -24,6 +24,7 @@ WHERE match('{query}*'){where}
 ORDER BY published_year ASC
 LIMIT 150
 """
+    INDEX = 'wbc'
 
     def search(self, issue_id=None):
         """

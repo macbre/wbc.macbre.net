@@ -37,6 +37,14 @@ class Sphinx(object):
 
         return self._connection
 
+    def escape_string(self, val):
+        """
+        :type val str
+        :rtype: str
+        """
+
+        return self.connection.escape_string(val)
+
     def query(self, query, args=None):
         """
         :type query str
@@ -49,6 +57,37 @@ class Sphinx(object):
             cursor.execute(query, args)
             res = cursor.fetchall()
             return res
+
+    def call_suggest(self, query, index, limit=20, **kwargs):
+        """
+        :type query str
+        :type index str
+        :type limit int
+        :rtype: list
+        """
+        query = query.lower()
+
+        # @see http://sphinxsearch.com/blog/2016/10/03/2-3-2-feature-built-in-suggests/
+        parts = [
+            "'{}'".format(self.escape_string(query)),
+            "'{}'".format(self.escape_string(index)),
+            '{} as limit'.format(int(limit)*10)
+        ]
+
+        for key, val in kwargs.items():
+            parts.append('{} as {}'.format(int(val), key))  # e.g. limit, max_edits, delta_len
+
+        res = self.query("CALL SUGGEST({})".format(', '.join(parts)))
+
+        # sort by 'docs' ASC
+        # {'suggest': 'marcinkowski', 'distance': '3', 'docs': '303'}
+        res = sorted(res, reverse=True, key=lambda item: int(item['docs']))
+
+        # all suggestions should start with a query phrase
+        res = list(filter(lambda item: item['suggest'].startswith(query), res))
+
+        # take the top "limit" items and then sort them alphabetically
+        return sorted(item['suggest'] for item in res[:limit])
 
     def get_indices(self):
         """
