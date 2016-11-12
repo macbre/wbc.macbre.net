@@ -22,7 +22,7 @@ class Suggest(MethodView, SearchableMixin):
                 index=SearchableMixin.INDEX,
                 limit=20,
                 max_edits=15,
-                delta_len=10,
+                delta_len=8,
             )
         except Exception as e:
             raise WBCApiError('Error while getting suggestions: {} {}'.format(e.__class__, str(e)))

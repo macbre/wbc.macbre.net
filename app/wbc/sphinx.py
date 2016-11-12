@@ -65,11 +65,13 @@ class Sphinx(object):
         :type limit int
         :rtype: list
         """
+        query = query.lower()
+
         # @see http://sphinxsearch.com/blog/2016/10/03/2-3-2-feature-built-in-suggests/
         parts = [
             "'{}'".format(self.escape_string(query)),
             "'{}'".format(self.escape_string(index)),
-            '{} as limit'.format(int(limit)*4)
+            '{} as limit'.format(int(limit)*10)
         ]
 
         for key, val in kwargs.items():
