@@ -2,15 +2,12 @@
 # macbre (c) 2016
 FROM debian:sid
 
-# use bash to have 'source' command
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
-
 # install dependencies
 RUN apt-get update && apt-get install -y wget
 
-ENV SPHINX_VERSION 2.2.11
+ENV SPHINX_VERSION 2.3.2-beta
 
-RUN wget http://sphinxsearch.com/files/sphinxsearch_${SPHINX_VERSION}-release-1~jessie_amd64.deb -O /tmp/sphinxsearch.deb
+RUN wget http://sphinxsearch.com/files/sphinxsearch_${SPHINX_VERSION}-1~jessie_amd64.deb -O /tmp/sphinxsearch.deb
 RUN dpkg -i /tmp/sphinxsearch.deb || apt-get -f install -y
 
 # set timezone
