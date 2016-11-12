@@ -25,7 +25,7 @@ services:
       GIT_HASH: "${GIT_HASH}"
     links:
     - sphinx
-    :ogging:
+    logging:
       driver: syslog
       options:
         tag: wbc-app
