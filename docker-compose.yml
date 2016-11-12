@@ -14,17 +14,6 @@ services:
       options:
         tag: wbc-sphinx
     hostname: sphinx-docker
-  # used for search suggestions
-  redis:
-    build:
-      context: redis3
-    volumes:
-      - ./redis3/data:/opt/redis
-    logging:
-      driver: syslog
-      options:
-        tag: wbc-redis
-    hostname: redis-docker
   # Flask app
   app:
     build:
@@ -36,8 +25,7 @@ services:
       GIT_HASH: "${GIT_HASH}"
     links:
     - sphinx
-    - redis
-    logging:
+    :ogging:
       driver: syslog
       options:
         tag: wbc-app
