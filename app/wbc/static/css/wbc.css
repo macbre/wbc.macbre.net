@@ -1,4 +1,17 @@
 /*********************************************************************************************************
+ * FONTS
+ */
+body {
+    font-family: "Lato", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+article h1,
+article p,
+article blockquote {
+    font-family: 'Lora', serif;
+}
+
+/*********************************************************************************************************
  * NAV-BAR
  */
 #search {
@@ -48,6 +61,10 @@ article {
     margin: 3em 0;
 }
 
+article h1 {
+    text-align: center;
+}
+
 article h3 {
     color: #006cb0;
     border-top: solid 1px #aaa;
@@ -55,6 +72,7 @@ article h3 {
     font-weight: bold;
     text-align: center;
     margin: 2em 5%;
+    letter-spacing: -1px;
 }
 
 article h3 span {
@@ -64,6 +82,12 @@ article h3 span {
     top: -0.6em;
     padding: 0 1em;
     max-width: 65%;
+}
+
+article p {
+    color: #333;
+    font-size: 1.2em;
+    line-height: 1.9em;
 }
 
 article .toolbox {
