@@ -12,6 +12,8 @@ COPY site.conf /etc/nginx/conf.d/
 COPY caching.conf /etc/nginx/conf.d/
 
 # SSL certificate
+# ssl.key and ssl.crt files
+# https://github.com/macbre/wbc.macbre.net/issues/21
 RUN mkdir /etc/nginx/cert/
 COPY ssl.* /etc/nginx/cert/
 
