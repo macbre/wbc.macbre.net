@@ -11,6 +11,12 @@ COPY site.conf /etc/nginx/conf.d/
 # caching
 COPY caching.conf /etc/nginx/conf.d/
 
+# SSL certificate
+# ssl.key and ssl.crt files
+# https://github.com/macbre/wbc.macbre.net/issues/21
+RUN mkdir /etc/nginx/cert/
+COPY ssl.* /etc/nginx/cert/
+
 # redirect errors and access log
 RUN rm -f /var/log/nginx/*
 RUN ln -s /dev/stderr /var/log/nginx/error.log
