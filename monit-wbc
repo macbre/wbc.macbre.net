@@ -2,6 +2,9 @@
 
 check host wbc with address wbc.macbre.net
 	if failed
-		port 80 protocol http
+		port 443
+		protocol https
+		protocol https
 		request "/healthcheck"
+		certificate valid > 10 days
 	then alert
