@@ -48,9 +48,22 @@ class DocumentModelTest(unittest.TestCase):
             assert model.get_full_url() == \
                 '/document/6224/foobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoob.html'
 
+    def test_get_content(self):
+        assert self.model._get_content() == 'foo\n\n\n\n<bar>'
+
     def test_get_html_content(self):
-        assert self.model.get_html_content() == \
-                '<p>foo</p>\n\n<p>&lt;bar&gt;</p>'
+        assert self.model.get_html_content() == '<p>foo</p>\n\n<p>&lt;bar&gt;</p>'
+
+    def test_get_intro(self):
+        with app.test_request_context():
+            model = DocumentModel(**{
+                'id': 6224,
+                'issue_id': 123,
+                'chapter': u'DWIE BASZTY WEWNĘTRZNEGO MURU OBRONNEGO PRZY UL. MASZTALARSKIEJ',
+                'content': u'Niewielu spacerujących ulicą Masztalarską wie, że po jej północnej stronie zachowały się do dzisiaj dwie baszty oraz odcinek muru zewnętrznego stanowiące pozostałości północno-zachodniego pierścienia średniowiecznych murów obronnych Poznania.',
+            })
+
+            assert model.get_intro(75) == u'Niewielu spacerujących ulicą Masztalarską wie, że po jej północnej...'
 
     @staticmethod
     def test_new_from_id():

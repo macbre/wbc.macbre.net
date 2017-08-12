@@ -31,6 +31,7 @@ class DocumentHTML(MethodView):
             'issue_name': document['issue_name'],
             'title': document['chapter'],
             'published_year': document['published_year'],
+            'intro': document.get_intro(),
             'content': document.get_html_content(),
             'cite': document.get_cite(),
             'djvu_url': document.get_djvu_url(),
