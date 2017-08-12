@@ -70,7 +70,7 @@ class DocumentModel(Model):
         """
         return url_for('documents', document_id=self['id'])
 
-    def get_html_content(self):
+    def _get_content(self):
         """
         :rtype: str
         """
@@ -81,9 +81,15 @@ class DocumentModel(Model):
         if content.startswith(title):
             content = content[len(title):]
 
+        return content
+
+    def get_html_content(self):
+        """
+        :rtype: str
+        """
         parts = []
 
-        for line in content.split('\n'):
+        for line in self._get_content().split('\n'):
             line = line.strip()
 
             if line == '':
@@ -96,6 +102,18 @@ class DocumentModel(Model):
 
         # return HTML-formatted content
         return '<p>{}</p>'.format('</p>\n\n<p>'.join(parts))
+
+    def get_intro(self, length=500):
+        """
+        :type length int
+        :rtype: str
+        """
+        content = self._get_content()[0:length].strip().replace('\n', ' ')
+
+        # remove trailing partial word
+        content = re.sub(r'\s\w+$', '...', content)
+
+        return content
 
     def get_cite(self):
         """

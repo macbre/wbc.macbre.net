@@ -3,6 +3,11 @@
 {% block head_extra %}
     <link rel="canonical" href="{{ full_url }}" />
     <link rel="alternate" type="image/vnd.djvu" title="DjVu" href="{{ djvu_url }}" />
+
+    <meta property="og:site_name" content="wbc.macbre.net" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:description" content="{{ intro }}" />
 {% endblock %}
 {% block content %}
 <article itemscope itemtype="http://schema.org/PublicationIssue">
