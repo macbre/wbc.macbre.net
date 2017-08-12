@@ -13,6 +13,17 @@
 
 [`macbre/wbc`](https://github.com/macbre/wbc) can fetch and convert DJVU files to XML format that can be indexed by SphinxSE.
 
+## Development
+
+Run the following:
+
+```
+docker-compose up -d sphinx
+cd app && virtualen env && source env/bin/activate && pip install -e . && ./server_debug.sh
+```
+
+The local instance of wbc.macbre.net should be ready at `http://0.0.0.0:8080/`
+
 ## API
 
 > Needs to be prefixed with `/api/v1` (e.g. `/api/v1/search?q=foo`)
