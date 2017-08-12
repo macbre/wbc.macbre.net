@@ -1,7 +1,7 @@
 from flask import jsonify, request, url_for
 from flask.views import MethodView
 
-from wbc.common import LoggableMixin
+from wbc.common import LoggableMixin, encode_html
 from wbc.connectors import get_sphinx
 from wbc.exceptions import WBCApiError
 from wbc.models import DocumentModel
@@ -15,7 +15,7 @@ SELECT
     id,
     SNIPPET(title, '{query}', 'limit=150', 'around=15','before_match=<mark>', 'after_match=</mark>') as document_name,
     chapter,
-    SNIPPET(content, '{query}', 'limit=300', 'around=85', 'before_match=<mark>', 'after_match=</mark>') as snippet,
+    SNIPPET(content, '{query}', 'limit=300', 'around=85', 'before_match=[mark]', 'after_match=[/mark]') as snippet,
     published_year,
     publication_id,
     document_id AS issue_id
@@ -70,6 +70,11 @@ LIMIT 150
         for row in res:
             document = DocumentModel(**row)
 
+            snippet = encode_html(document['snippet'])
+            snippet = snippet.\
+                replace('[mark]', '<mark>').\
+                replace('[/mark]', '</mark>')
+
             results.append({
                 'id': int(document['id']),
                 'name': document['chapter'],
@@ -94,7 +99,7 @@ LIMIT 150
                     },
                 },
                 # the document details
-                'snippet': document['snippet'],
+                'snippet': snippet,
             })
 
         meta = sphinx.get_meta()
