@@ -1,3 +1,5 @@
+import re
+
 from flask import jsonify
 from flask.views import MethodView
 
@@ -61,6 +63,16 @@ LIMIT 10
 class Suggest(MethodView, SearchableMixin):
 
     @staticmethod
+    def trim_query(query):
+        """
+        :type query str
+        :rtype: str
+        """
+        # remove the trailing query if too short
+        # "sprawa pau"
+        return re.sub(r'\s([^\s]{1,2})$', '', query).rstrip()
+
+    @staticmethod
     def suggest_keyword(query):
         """
         :type query str
@@ -78,12 +90,13 @@ class Suggest(MethodView, SearchableMixin):
         except Exception as e:
             raise WBCApiError('Error while getting keyword suggestions: {} {}'.format(e.__class__, str(e)))
 
-    @staticmethod
-    def suggest_publication(query):
+    def suggest_publication(self, query):
         """
         :type query str
         :rtype: list[str]
         """
+        query = self.trim_query(query)
+
         try:
             return PublicationSuggest(query).search()
         except Exception as e:
