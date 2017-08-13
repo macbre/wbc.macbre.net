@@ -48,6 +48,14 @@ article blockquote {
     padding: 7px 2px;
     margin: 0px 3px;
     border-bottom: solid 1px #ddd;
+    white-space: pre;
+    overflow: hidden;
+}
+
+.autocomplete-suggestion small {
+    font-size: 0.8em;
+    color: #999;
+    padding-left: 1em;
 }
 
 .autocomplete-suggestion:last-child {

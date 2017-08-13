@@ -47,6 +47,7 @@ $(function() {
             var url = item.data('url');
             if (url) {
                 document.location = url;
+                event.preventDefault();
             }
             else {
                 $('#search form').submit();
