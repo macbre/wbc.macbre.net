@@ -8,6 +8,7 @@ from wbc.models import DocumentModel
 
 
 class SearchableMixin(LoggableMixin):
+    # @see http://sphinxsearch.com/docs/current/sphinxql-select.html
     # @see http://sphinxsearch.com/docs/current/api-func-buildexcerpts.html
     # @see http://sphinxsearch.com/docs/current/sphinxql-call-snippets.html
     QUERY = """
@@ -45,25 +46,7 @@ LIMIT 150
             'stats': stats
         })
 
-    def _get_results(self, query, issue_id=None):
-        """
-        :type query str
-        :type issue_id int
-        :rtype: list
-        """
-        sphinx = get_sphinx()
-
-        conditions = list(filter(None, [
-            'issue_id={}'.format(int(issue_id)) if issue_id is not None else ''
-        ]))
-
-        self._logger.debug("Searching for '{}' ({})".format(query, conditions))
-
-        query_escaped = sphinx.connection.escape_string(query)
-        res = sphinx.query(self.QUERY.format(
-            query=query_escaped.replace("\n", ' '),
-            where=' AND '.join([''] + conditions)
-        ))
+    def _format_results(self, res):
 
         results = []
 
@@ -101,6 +84,30 @@ LIMIT 150
                 # the document details
                 'snippet': snippet,
             })
+
+        return results
+
+    def _get_results(self, query, issue_id=None):
+        """
+        :type query str
+        :type issue_id int
+        :rtype: list
+        """
+        sphinx = get_sphinx()
+
+        conditions = list(filter(None, [
+            'issue_id={}'.format(int(issue_id)) if issue_id is not None else ''
+        ]))
+
+        self._logger.debug("Searching for '{}' ({})".format(query, conditions))
+
+        query_escaped = sphinx.connection.escape_string(query)
+        res = sphinx.query(self.QUERY.format(
+            query=query_escaped.replace("\n", ' '),
+            where=' AND '.join([''] + conditions)
+        ))
+
+        results = self._format_results(res)
 
         meta = sphinx.get_meta()
         stats = {
