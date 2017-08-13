@@ -8,16 +8,16 @@ from wbc.connectors import get_sphinx
 
 
 class Suggest(MethodView, SearchableMixin):
-    def get(self):
-        # validate queries
-        if not self.is_searchable():
-            raise WBCApiError('Query string is empty, "q" URL parameter is missing', 400)
 
-        query = self._get_search_query()
-
+    @staticmethod
+    def suggest_keyword(query):
+        """
+        :type query str
+        :rtype: list[str]
+        """
         # http://sphinxsearch.com/blog/2016/10/03/2-3-2-feature-built-in-suggests/
         try:
-            suggestions = get_sphinx().call_suggest(
+            return get_sphinx().call_suggest(
                 query=query,
                 index=SearchableMixin.INDEX,
                 limit=20,
@@ -26,6 +26,18 @@ class Suggest(MethodView, SearchableMixin):
             )
         except Exception as e:
             raise WBCApiError('Error while getting suggestions: {} {}'.format(e.__class__, str(e)))
+
+    def get(self):
+        # validate queries
+        if not self.is_searchable():
+            raise WBCApiError('Query string is empty, "q" URL parameter is missing', 400)
+
+        query = self._get_search_query()
+
+        # 1. suggest keywords
+        suggestions = self.suggest_keyword(query)
+
+        # 2. suggest the publication
 
         return jsonify([
             query,
