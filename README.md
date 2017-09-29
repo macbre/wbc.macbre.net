@@ -70,3 +70,10 @@ Return [search suggestions](http://www.opensearch.org/Specifications/OpenSearch/
 
 * https://schema.org/PublicationIssue
 * https://schema.org/PublicationVolume
+
+
+## Certificate renewal
+
+```sh
+acme.sh --issue -d wbc.macbre.net  --stateless --force
+```
