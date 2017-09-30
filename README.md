@@ -71,6 +71,20 @@ Return [search suggestions](http://www.opensearch.org/Specifications/OpenSearch/
 * https://schema.org/PublicationIssue
 * https://schema.org/PublicationVolume
 
+## Running with supervisor
+
+This will make sure that the server fires up after system restart.
+
+```
+sudo -i
+
+apt-get install supervisor
+cp wbc-supervisor.conf /etc/supervisor/conf.d/
+
+supervisorctl reread
+supervisorctl update
+supervisorctl start wbc-macbre-net
+```
 
 ## Certificate renewal
 
