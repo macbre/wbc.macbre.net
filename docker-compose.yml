@@ -47,3 +47,7 @@ services:
       options:
         tag: wbc-nginx
     hostname: "nginx-docker-${HOST}"
+    depends_on:
+    - app
+    - sphinx
+    restart: always

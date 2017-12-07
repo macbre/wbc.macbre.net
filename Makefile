@@ -12,7 +12,7 @@ sitemap:
 start:
 	GIT_HASH=`git rev-parse HEAD` \
 	HOST=`hostname` \
-	docker-compose up
+	docker-compose up -d
 
 stop:
 	docker-compose stop
