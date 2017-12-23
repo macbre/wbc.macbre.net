@@ -30,4 +30,4 @@ COPY sphinx.conf /opt/sphinx.conf
 EXPOSE 36307
 
 # run it
-ENTRYPOINT ["searchd", "--nodetach", "--config /opt/sphinx.conf"]
+ENTRYPOINT searchd --nodetach --config /opt/sphinx.conf
