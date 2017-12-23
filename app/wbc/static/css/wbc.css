@@ -2,8 +2,29 @@
  * FONTS
  * loaded from Google Fonts
  */
-body {
-    font-family: "Lato", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+body,
+#search input {
+    font-family: "Fira Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/** Bona Nova - http://bonanova.wtf/ **/
+@font-face {
+  font-family: "BonaNova-Bold";
+  src: url("fonts/BonaNova-Bold.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "BonaNova-Italic";
+  src: url("fonts/BonaNova-Italic.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "BonaNova-Regular";
+  src: url("fonts/BonaNova-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 article h1,
@@ -11,7 +32,7 @@ article h2,
 article p,
 article cite,
 article blockquote {
-    font-family: 'EB Garamond', serif;
+    font-family: 'BonaNova-Regular', serif;
     font-size: 1.25em;
 }
 
@@ -77,6 +98,12 @@ article h1 {
     color: #333;
     text-align: center;
     font-size: 4em;
+    letter-spacing: -3px;
+}
+
+article h2 {
+    color: #333;
+    font-size: 2em;
 }
 
 article h3 {
@@ -93,15 +120,26 @@ article h3 span {
     background: #fff;
     display: inline-block;
     position: relative;
-    top: -0.75em;
+    top: -1.25em;
     padding: 0 1em;
     max-width: 65%;
 }
 
 article p {
     color: #222;
-    font-size: 1.5em;
+    font-size: 1.6em;
     line-height: 2em;
+}
+
+article a {
+    border-bottom: solid 2px rgba(30,174,219,.4);
+    padding: 0 2px;
+    text-decoration: none;
+    transition: all .5s ease-in;
+}
+
+article a:hover {
+    background-color: rgba(30,174,219,.1);
 }
 
 article .toolbox {
@@ -125,7 +163,7 @@ article cite {
 
 article input.cite {
     background: #fafafa;
-    font-family: monospace;
+    font-family: Inconsolata, monospace;
 }
 
 /*********************************************************************************************************
@@ -240,10 +278,12 @@ footer {
 
 footer a {
     color: #fff !important;
+    text-decoration: none;
+    border-bottom: solid 2px rgba(255,255,255,.4);
 }
 
 footer .git-info {
-    font-family: monospace;
+    font-family: Inconsolata, monospace;
     text-align: right;
 }
 
