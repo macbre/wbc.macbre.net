@@ -71,23 +71,13 @@ Return [search suggestions](http://www.opensearch.org/Specifications/OpenSearch/
 * https://schema.org/PublicationIssue
 * https://schema.org/PublicationVolume
 
-## Running with supervisor
-
-This will make sure that the server fires up after system restart.
-
-```
-sudo -i
-
-apt-get install supervisor
-cp wbc-supervisor.conf /etc/supervisor/conf.d/
-
-supervisorctl reread
-supervisorctl update
-supervisorctl start wbc-macbre-net
-```
-
 ## Certificate renewal
 
 ```sh
 acme.sh --issue -d wbc.macbre.net  --stateless --force
 ```
+
+## Content indexing
+
+* get XML content from http://s3.macbre.net/wbc/106644.xml.gz (indexed by [`macbre/wbc`](https://github.com/macbre/wbc))
+* run `make index` to index XML file in sphinx
