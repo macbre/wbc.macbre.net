@@ -25,3 +25,9 @@ RUN ln -sv /dev/stdout /opt/sphinx/log/searchd.log
 ENV HOME /opt/sphinx
 WORKDIR /opt/sphinx
 COPY sphinx.conf /opt/sphinx.conf
+
+# expose TCP port
+EXPOSE 36307
+
+# run it
+ENTRYPOINT searchd --nodetach --config /opt/sphinx.conf

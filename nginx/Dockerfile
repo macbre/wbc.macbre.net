@@ -1,5 +1,5 @@
 # Dockerfile for ngnix
-FROM nginx:1.11.1-alpine
+FROM nginx:1.13.7-alpine
 RUN rm /etc/nginx/conf.d/default.conf
 
 # basic configs

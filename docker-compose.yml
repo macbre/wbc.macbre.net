@@ -3,7 +3,6 @@ services:
   sphinx:
     build:
       context: sphinx
-    command: "searchd --nodetach --config /opt/sphinx.conf"
     ports:
     - "127.0.0.1:36307:36307" # bind to local interface only!
     volumes:
@@ -38,7 +37,7 @@ services:
     volumes:
       - ./nginx/cache:/var/nginx/cache
     ports:
-    - "80:80"
+    - "${NGINX_HTTP_PORT}:80"
     - "443:443"
     links:
     - app
