@@ -1,6 +1,6 @@
 # Dockerfile for Sphinx SE
 # macbre (c) 2016-2017
-FROM debian:stretch
+FROM debian:jessie
 
 # install dependencies
 RUN apt-get update && apt-get install -y wget
