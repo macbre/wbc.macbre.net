@@ -3,7 +3,7 @@
  * loaded from Google Fonts
  */
 body {
-    font-family: "Lato", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Fira Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 article h1,
@@ -79,6 +79,11 @@ article h1 {
     font-size: 4em;
 }
 
+article h2 {
+    color: #333;
+    font-size: 2em;
+}
+
 article h3 {
     color: #006cb0;
     border-top: double 3px #aaa;
@@ -102,6 +107,17 @@ article p {
     color: #222;
     font-size: 1.5em;
     line-height: 2em;
+}
+
+article a {
+    border-bottom: solid 2px rgba(30,174,219,.4);
+    padding: 0 2px;
+    text-decoration: none;
+    transition: all .5s ease-in;
+}
+
+article a:hover {
+    background-color: rgba(30,174,219,.1);
 }
 
 article .toolbox {
@@ -240,10 +256,12 @@ footer {
 
 footer a {
     color: #fff !important;
+    text-decoration: none;
+    border-bottom: solid 2px rgba(255,255,255,.4);
 }
 
 footer .git-info {
-    font-family: monospace;
+    font-family: Inconsolata, monospace;
     text-align: right;
 }
 
