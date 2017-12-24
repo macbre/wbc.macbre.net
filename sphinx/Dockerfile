@@ -30,12 +30,9 @@ RUN indexer -v
 RUN ln -sv /dev/stdout /opt/sphinx/log/query.log
 RUN ln -sv /dev/stdout /opt/sphinx/log/searchd.log
 
-# home dir
-ENV HOME /opt/sphinx
-WORKDIR /opt/sphinx
-COPY sphinx.conf /opt/sphinx.conf
-
 # expose TCP port
 EXPOSE 36307
 
-CMD searchd --nodetach --config /opt/sphinx.conf
+VOLUME /opt/sphinx/conf
+
+CMD searchd --nodetach --config /opt/sphinx/conf/sphinx.conf
