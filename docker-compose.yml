@@ -29,13 +29,20 @@ services:
     hostname: "app-docker-${HOST}"
   # nginx proxy
   nginx:
-    build:
-      context: nginx
-    command: "nginx -g 'daemon off;'"
+    image: nginx:1.13
     volumes:
+      # mount cache directory
       - ./nginx/cache:/var/nginx/cache
+      # mount SSL certificate files
+      - ./nginx/wbc.macbre.net.cer:/etc/nginx/cert/wbc.macbre.net.cer
+      - ./nginx/wbc.macbre.net.key:/etc/nginx/cert/wbc.macbre.net.key
+      # mount site config
+      - ./nginx/site.conf:/etc/nginx/conf.d/wbc.conf
+      # common config files
+      - ./nginx/gzip.conf:/etc/nginx/conf.d/gzip.conf
+      - ./nginx/caching.conf:/etc/nginx/conf.d/caching.conf
     ports:
-    - "${NGINX_HTTP_PORT}:80"
+    - "${NGINX_HTTP_PORT}:81"
     - "443:443"
     logging:
       driver: syslog
