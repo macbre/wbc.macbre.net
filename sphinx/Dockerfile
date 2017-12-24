@@ -14,8 +14,10 @@ RUN dpkg -i /tmp/sphinxsearch.deb || apt-get -f install -y
 # @see http://unix.stackexchange.com/a/76711
 RUN cp /usr/share/zoneinfo/CET /etc/localtime && dpkg-reconfigure --frontend noninteractive tzdata
 
-# set up directories
-RUN mkdir -pv /opt/sphinx/log /opt/sphinx/index/wbc
+# set up and expose directories
+RUN mkdir -pv /opt/sphinx/log /opt/sphinx/index
+VOLUME /opt/sphinx/index
+
 
 # redirect logs to stdout
 RUN ln -sv /dev/stdout /opt/sphinx/log/query.log
@@ -28,3 +30,5 @@ COPY sphinx.conf /opt/sphinx.conf
 
 # expose TCP port
 EXPOSE 36307
+
+CMD searchd --nodetach --config /opt/sphinx.conf
