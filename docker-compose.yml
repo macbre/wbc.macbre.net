@@ -22,8 +22,6 @@ services:
     - ./app/sitemap:/opt/app/wbc/sitemap
     environment:
       GIT_HASH: "${GIT_HASH}"
-    links:
-    - sphinx
     logging:
       driver: syslog
       options:
@@ -39,8 +37,6 @@ services:
     ports:
     - "${NGINX_HTTP_PORT}:80"
     - "443:443"
-    links:
-    - app
     logging:
       driver: syslog
       options:
