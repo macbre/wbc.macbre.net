@@ -4,7 +4,10 @@ FROM debian:stretch
 ENV SPHINX_VERSION 3.0.1-7fec4f6
 
 # install dependencies
-RUN apt-get update && apt-get install -y wget
+RUN apt-get update && apt-get install -y \
+	default-libmysqlclient-dev \
+	libpq-dev \
+	wget
 
 # set timezone
 # @see http://unix.stackexchange.com/a/76711
