@@ -1,8 +1,7 @@
 version: '2'
 services:
   sphinx:
-    build:
-      context: sphinx
+    image: macbre/sphinxsearch:3.0.1
     ports:
     - "127.0.0.1:36307:36307" # bind to local interface only!
     volumes:
