@@ -119,7 +119,7 @@ class DocumentModel(Model):
         """
         :rtype: str
         """
-        if self['issue_name'].startswith('Gazeta Wielkiego Xięstwa Poznańskiego'):
+        if self['issue_name'].startswith(u'Gazeta Wielkiego Xięstwa Poznańskiego'):
             return u'{{{{Źródło|tytuł={name}}}}}'.format(name=self['issue_name'])
 
         # extract issue no
