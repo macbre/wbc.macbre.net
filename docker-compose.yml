@@ -7,7 +7,7 @@ services:
     volumes:
     - ./sphinx/data:/opt/sphinx/index
     - ./sphinx/sphinx.conf:/opt/sphinx/conf/sphinx.conf
-    mem_limit: 180m
+    mem_limit: 256m # match indexer.value from sphinx.conf
     logging:
       driver: syslog
       options:
