@@ -79,16 +79,16 @@ acme.sh --issue -d wbc.macbre.net  --stateless --force
 
 ## Content indexing
 
-* get XML content from http://s3.macbre.net/wbc/106644.xml.gz (indexed by [`macbre/wbc`](https://github.com/macbre/wbc))
+* get XML content from `http://s3.macbre.net/wbc/kronika_gazeta_wielkiego_ksiestwa.xml.gz` (indexed by [`macbre/wbc`](https://github.com/macbre/wbc))
 * run `make index` to index XML file in sphinx
 
 ```
-using config file '/opt/sphinx.conf'...
+using config file '/opt/sphinx/conf/sphinx.conf'...
 indexing index 'wbc'...
-collected 6968 docs, 123.9 MB
-sorted 17.0 Mhits, 100.0% done
-total 6968 docs, 123948611 bytes
-total 22.636 sec, 5475608 bytes/sec, 307.82 docs/sec
-total 510 reads, 2.005 sec, 423.4 kb/call avg, 3.9 msec/call avg
-total 1418 writes, 0.324 sec, 303.6 kb/call avg, 0.2 msec/call avg
+collected 11980 docs, 246.9 MB
+sorted 35.1 Mhits, 100.0% done
+total 11980 docs, 246858497 bytes
+total 318.765 sec, 774419 bytes/sec, 37.58 docs/sec
+total 97 reads, 1.865 sec, 2095.4 kb/call avg, 19.2 msec/call avg
+total 1650 writes, 0.733 sec, 390.8 kb/call avg, 0.4 msec/call avg
 ```
