@@ -119,6 +119,9 @@ class DocumentModel(Model):
         """
         :rtype: str
         """
+        if self['issue_name'].startswith('Gazeta Wielkiego Xięstwa Poznańskiego'):
+            return u'{{{{Źródło|tytuł={name}}}}}'.format(name=self['issue_name'])
+
         # extract issue no
         # Kronika Miasta Poznania 2009 Nr2; Okupacja 1
         # ... Poznania 1960.01/06 R.28 Nr1/2

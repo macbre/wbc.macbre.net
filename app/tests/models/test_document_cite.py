@@ -23,6 +23,16 @@ class DocumentCiteTest(unittest.TestCase):
                 'published_year': '1933',
                 'issue_name': u'Kronika Miasta Poznania: kwartalnik poświęcony sprawom kulturalnym stoł. m. Poznania: organ Towarzystwa Miłośników Miasta Poznania 1933 R.11 Nr2/3',
             },
+            u'{{Źródło|tytuł=Gazeta Wielkiego Xięstwa Poznańskiego 1815.06.24 Nr50}}': {
+                'chapter': u'GAZETA , WIELKIEGO XIESTW A POZNANSKIEGO.',
+                'published_year': '1815',
+                'issue_name': u'Gazeta Wielkiego Xięstwa Poznańskiego 1815.06.24 Nr50',
+            },
+            u'{{Źródło|tytuł=Gazeta Wielkiego Xięstwa Poznańskiego 1852.12.31 Nr307}}': {
+                'chapter': u')J( 307w Piątekdnia 31. Grudnia 1852',
+                'published_year': '1852',
+                'issue_name': u'Gazeta Wielkiego Xięstwa Poznańskiego 1852.12.31 Nr307',
+            },
         }
 
         for expected, data in cases.items():
