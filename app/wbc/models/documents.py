@@ -31,7 +31,8 @@ class DocumentModel(Model):
         :rtype: DocumentModel
         """
         res = get_sphinx().query(
-                'SELECT id, title AS issue_name, document_id AS issue_id, published_year, chapter, content ' +
+                'SELECT id, title AS issue_name, document_id AS issue_id, published_year, ' +
+                'read_time, chapter, content ' +
                 'FROM wbc WHERE id = {}'.
                 format(int(document_id))
         )
@@ -69,6 +70,12 @@ class DocumentModel(Model):
         :rtype: str
         """
         return url_for('documents', document_id=self['id'])
+
+    def get_read_time(self):
+        """
+        :rtype: int
+        """
+        return self['read_time']
 
     def _get_content(self):
         """

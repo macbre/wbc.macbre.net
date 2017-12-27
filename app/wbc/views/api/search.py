@@ -1,3 +1,5 @@
+from math import ceil
+
 from flask import jsonify, request, url_for
 from flask.views import MethodView
 
@@ -17,6 +19,7 @@ SELECT
     SNIPPET(title, '{query}', 'limit=150', 'around=15','before_match=<mark>', 'after_match=</mark>') as document_name,
     chapter,
     SNIPPET(content, '{query}', 'limit=300', 'around=85', 'before_match=[mark]', 'after_match=[/mark]') as snippet,
+    read_time,
     published_year,
     publication_id,
     document_id AS issue_id
@@ -83,6 +86,8 @@ LIMIT 150
                 },
                 # the document details
                 'snippet': snippet,
+                # read time
+                'read_time': ceil(document.get_read_time() / 60)
             })
 
         return results

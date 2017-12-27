@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from math import ceil
+
 from flask import render_template, redirect, make_response, request
 from flask.views import MethodView
 
@@ -31,6 +33,7 @@ class DocumentHTML(MethodView):
             'issue_name': document['issue_name'],
             'title': document['chapter'],
             'published_year': document['published_year'],
+            'read_time': ceil(document.get_read_time() / 60),  # minutes
             'intro': document.get_intro(),
             'content': document.get_html_content(),
             'cite': document.get_cite(),

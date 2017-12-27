@@ -14,6 +14,7 @@ class DocumentModelTest(unittest.TestCase):
         self.model = DocumentModel(**{
             'id': 6224,
             'issue_id': 123,
+            'read_time': 116,
             'chapter': chapter,
             'content': chapter + 'foo\n\n\n\n<bar>'
         })
@@ -48,6 +49,9 @@ class DocumentModelTest(unittest.TestCase):
             assert model.get_full_url() == \
                 '/document/6224/foobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoob.html'
 
+    def test_get_read_time(self):
+        assert self.model.get_read_time() == 116
+
     def test_get_content(self):
         assert self.model._get_content() == 'foo\n\n\n\n<bar>'
 
@@ -69,7 +73,7 @@ class DocumentModelTest(unittest.TestCase):
     def test_new_from_id():
         with app.test_request_context():
             query = """
-SELECT id, title AS issue_name, document_id AS issue_id, published_year, chapter, content FROM wbc WHERE id = 453
+SELECT id, title AS issue_name, document_id AS issue_id, published_year, read_time, chapter, content FROM wbc WHERE id = 453
             """.strip()
 
             get_sphinx_mock(query, [{

@@ -31,6 +31,7 @@ class Document(MethodView):
             'id': int(document['id']),
             'name': document['chapter'],
             'content': document['content'],
+            'read_time': document['read_time'],
             'issue': {
                 'id': int(document['issue_id']),
                 'name': document['issue_name'],

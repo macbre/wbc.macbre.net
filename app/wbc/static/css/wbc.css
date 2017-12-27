@@ -31,9 +31,9 @@ article h1,
 article h2,
 article p,
 article cite,
-article blockquote {
+article blockquote,
+.search-results h4 {
     font-family: 'BonaNova-Regular', serif;
-    font-size: 1.25em;
 }
 
 /*********************************************************************************************************
@@ -155,10 +155,11 @@ article .toolbox a {
 article cite {
     color: #666;
     display: block;
-    margin: 5em 0;
+    margin: 3em 0;
     font-style: normal;
-    font-size: 1.1em;
+    font-size: 1.2em;
     line-height: 1.9em;
+    letter-spacing: -1px;
 }
 
 article input.cite {
@@ -194,7 +195,15 @@ body.search {
     color: #666;
 }
 
+.search-results .read-time strong {
+    border-bottom: solid 2px rgba(30,174,219,.4);
+    color: #1EAEDB;
+    font-weight: bold;
+}
+
 .search-results blockquote {
+    color: rgba(0,0,0, 0.75);
+    font-size: 1.3em;
     margin: 0;
 }
 
