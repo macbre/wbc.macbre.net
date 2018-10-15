@@ -10,15 +10,15 @@ setup(
     url='https://github.com/macbre/wbc.macbre.net',
     packages=find_packages(),
     install_requires=[
-        'coverage==4.2',
-        'flask==0.11.1',
-        'Flask-Assets==0.11',
+        'coverage==4.5.1',
+        'flask==1.0.2',
+        'Flask-Assets==0.12',
         'cssmin==0.2.0',
-        'jsmin==2.2.1',
-        'gunicorn==19.6.0',
+        'jsmin==2.2.2',
+        'gunicorn==19.9.0',
         'monolog-python==0.1.0',
-        'PyMySQL==0.7.6',
-        'pytest==2.9.2'
+        'PyMySQL==0.9.2',
+        'pytest==3.8.2'
     ],
     include_package_data=True,
     entry_points={
