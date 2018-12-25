@@ -1,7 +1,7 @@
 version: '2'
 services:
   sphinx:
-    image: macbre/sphinxsearch:3.0.1
+    image: macbre/sphinxsearch:3.1.1
     ports:
     - "127.0.0.1:36307:36307" # bind to local interface only!
     volumes:
@@ -29,7 +29,7 @@ services:
     hostname: "app-docker-${HOST}"
   # nginx proxy
   nginx:
-    image: nginx:1.13
+    image: nginx:1.15-alpine
     volumes:
       # mount cache directory
       - ./nginx/cache:/var/nginx/cache
