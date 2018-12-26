@@ -8,7 +8,7 @@
 
 [Docker Compose](https://docs.docker.com/compose/install/#/install-docker-compose) running the following:
 
-* SphinxSE instance
+* [Manticore Search](https://manticoresearch.com/) instance (this is a fork of Sphinx)
 * Flask-powered app providing HTTP API
 
 [`macbre/wbc`](https://github.com/macbre/wbc) can fetch and convert DJVU files to XML format that can be indexed by SphinxSE.
