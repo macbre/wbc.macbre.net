@@ -8,10 +8,20 @@ from wbc.common import get_app_version
 from wbc.exceptions import WBCHtmlError
 from wbc.models import DocumentModel
 
+from wbc.nlp.rake import Rake
+
 
 class DocumentHTML(MethodView):
     @staticmethod
-    def get(document_id, name=None):
+    def get_keywords(text):
+        """
+        :type text str
+        :rtype: list[(str, int)]
+        """
+        return Rake('polish.txt').run(text)
+
+    @classmethod
+    def get(cls, document_id, name=None):
         """
         :type document_id int
         :type name str
@@ -28,6 +38,9 @@ class DocumentHTML(MethodView):
         # redirect to a canonical URL
         if name is None:
             return redirect(document.get_full_url(), code=301)  # 301 Moved Permanently
+
+        import json
+        return json.dumps(cls.get_keywords(document['content']), indent=True)
 
         kwargs = {
             'issue_name': document['issue_name'],

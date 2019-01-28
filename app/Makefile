@@ -1,5 +1,8 @@
 coverage_options = --include='wbc/*' --omit='tests/*,env*/*,*__init__.py'
 
+init:
+	python setup.py develop
+
 test:
 	py.test -x tests/
 
