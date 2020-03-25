@@ -35,7 +35,7 @@ services:
       # mount cache directory
       - ./nginx/cache:/var/nginx/cache
       # mount SSL certificate files
-      - ./nginx/wbc.macbre.net.cer:/etc/nginx/cert/wbc.macbre.net.cer
+      - ./nginx/fullchain.cer:/etc/nginx/cert/fullchain.cer
       - ./nginx/wbc.macbre.net.key:/etc/nginx/cert/wbc.macbre.net.key
       # mount site config
       - ./nginx/site.conf:/etc/nginx/conf.d/wbc.conf
