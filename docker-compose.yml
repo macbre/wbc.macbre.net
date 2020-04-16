@@ -41,7 +41,6 @@ services:
       # mount site config
       - ./nginx/site.conf:/etc/nginx/conf.d/wbc.conf
       # common config files
-      - ./nginx/gzip.conf:/etc/nginx/conf.d/gzip.conf
       - ./nginx/caching.conf:/etc/nginx/conf.d/caching.conf
     ports:
     - "${NGINX_HTTP_PORT}:81"
