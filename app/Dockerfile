@@ -1,5 +1,5 @@
 # Dockerfile for Flask-app
-FROM python:3.6-stretch
+FROM python:3.8-slim
 
 # install venv
 RUN pip install virtualenv

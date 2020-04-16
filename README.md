@@ -19,7 +19,7 @@ Run the following:
 
 ```
 docker-compose up -d sphinx
-cd app && virtualenv env -p python3 && source env/bin/activate && pip install -e . && ./server_debug.sh
+cd app && virtualenv env -p python3.8 && source env/bin/activate && pip install -e . && ./server_debug.sh
 ```
 
 The local instance of wbc.macbre.net should be ready at `http://0.0.0.0:8080/`
