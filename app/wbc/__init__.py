@@ -5,7 +5,7 @@ import time
 from socket import gethostname
 
 from flask import g, Flask, jsonify, request, send_from_directory, render_template
-from werkzeug.contrib.fixers import ProxyFix
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from wbc.exceptions import WBCApiError, WBCHtmlError
 
