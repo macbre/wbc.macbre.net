@@ -36,12 +36,12 @@ services:
       # mount cache directory
       - ./nginx/cache:/var/nginx/cache
       # mount SSL certificate files
-      - ./nginx/wbc.macbre.net.cer:/etc/nginx/cert/wbc.macbre.net.cer
-      - ./nginx/wbc.macbre.net.key:/etc/nginx/cert/wbc.macbre.net.key
+      - ./nginx/fullchain.cer:/etc/nginx/cert/wbc.macbre.net.cer:ro
+      - ./nginx/wbc.macbre.net.key:/etc/nginx/cert/wbc.macbre.net.key:ro
       # mount site config
-      - ./nginx/site.conf:/etc/nginx/conf.d/wbc.conf
+      - ./nginx/site.conf:/etc/nginx/conf.d/wbc.conf:ro
       # common config files
-      - ./nginx/caching.conf:/etc/nginx/conf.d/caching.conf
+      - ./nginx/caching.conf:/etc/nginx/conf.d/caching.conf:ro
     ports:
     - "${NGINX_HTTP_PORT}:81"
     - "443:443"
