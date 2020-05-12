@@ -1,4 +1,4 @@
-version: '2'
+version: '2.4'
 services:
   sphinx:
     build:
@@ -54,3 +54,8 @@ services:
     - app
     - sphinx
     restart: always
+    healthcheck:
+      test: ["CMD", "wget", "0.0.0.0:81", "-q", "-U", "'wget/heathcheck'"]
+      interval: 15s
+      timeout: 1s
+      retries: 3
