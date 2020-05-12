@@ -19,6 +19,8 @@ services:
     build:
       context: app
     command: "gunicorn wbc:app -b 0.0.0.0:8080 --access-logfile -"
+    ports:
+    - "127.0.0.1:8080:8080" # bind a local interface only!
     volumes:
     - ./app/sitemap:/opt/app/wbc/sitemap
     environment:
@@ -55,7 +57,8 @@ services:
     - sphinx
     restart: always
     healthcheck:
-      test: ["CMD", "wget", "0.0.0.0:81", "-q", "-U", "'wget/heathcheck'"]
+      # wget -q 0.0.0.0:80/.well-known/acme-challenge/foo -O -
+      test: ["CMD", "wget", "0.0.0.0:81/.well-known/acme-challenge/foo", "-q", "-O" ,"-", "-U", "wget/heathcheck"]
       interval: 15s
       timeout: 1s
       retries: 3
