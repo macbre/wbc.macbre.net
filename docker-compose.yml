@@ -33,7 +33,7 @@ services:
   # nginx proxy
   nginx:
     # https://hub.docker.com/r/macbre/nginx-brotli
-    image: macbre/nginx-brotli:1.18.0
+    image: macbre/nginx-brotli:1.19.3.1
     volumes:
       # mount cache directory
       - ./nginx/cache:/var/nginx/cache
