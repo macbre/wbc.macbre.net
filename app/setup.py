@@ -12,7 +12,7 @@ setup(
     install_requires=[
         'coverage==4.5.1',
         'flask==1.1.2',
-        'Flask-Assets==0.12',
+        'Flask-Assets==2.0',
         'cssmin==0.2.0',
         'jsmin==2.2.2',
         'gunicorn==20.0.4',
