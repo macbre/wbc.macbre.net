@@ -17,7 +17,7 @@ setup(
         'jsmin==2.2.2',
         'gunicorn==20.0.4',
         'monolog-python==0.1.0',
-        'PyMySQL==0.9.2',
+        'PyMySQL==1.0.2',
         'pytest==6.2.2'
     ],
     include_package_data=True,
