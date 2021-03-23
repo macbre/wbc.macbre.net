@@ -20,7 +20,9 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
-      run: cd app && python setup.py install
+      run: |
+        pip install wheel
+        cd app && python setup.py install
 
     - name: Test with pytest
-      run: make coverage
+      run: cd app && make coverage
