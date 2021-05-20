@@ -33,7 +33,7 @@ services:
   # nginx proxy
   nginx:
     # https://hub.docker.com/r/macbre/nginx-brotli
-    image: macbre/nginx-brotli:1.19.8
+    image: macbre/nginx-brotli:1.19.6-http3
     volumes:
       # mount cache directory
       - ./nginx/cache:/var/nginx/cache
@@ -46,7 +46,8 @@ services:
       - ./nginx/caching.conf:/etc/nginx/conf.d/caching.conf:ro
     ports:
     - "${NGINX_HTTP_PORT}:81"
-    - "443:443"
+    - "443:443/tcp"
+    - "443:443/udp"
     logging:
       driver: syslog
       options:
