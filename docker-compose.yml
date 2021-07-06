@@ -32,8 +32,8 @@ services:
     hostname: "app-docker-${HOST}"
   # nginx proxy
   nginx:
-    # https://hub.docker.com/r/macbre/nginx-brotli
-    image: macbre/nginx-brotli:1.19.6-http3
+    # https://github.com/macbre/docker-nginx-http3/pkgs/container/nginx-http3
+    image: ghcr.io/macbre/nginx-http3:1.21.0
     volumes:
       # mount cache directory
       - ./nginx/cache:/var/nginx/cache
