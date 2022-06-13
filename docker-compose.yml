@@ -33,7 +33,7 @@ services:
   # nginx proxy
   nginx:
     # https://github.com/macbre/docker-nginx-http3/pkgs/container/nginx-http3
-    image: ghcr.io/macbre/nginx-http3:1.21.0
+    image: ghcr.io/macbre/nginx-http3:latest
     volumes:
       # mount cache directory
       - ./nginx/cache:/var/nginx/cache
