@@ -48,13 +48,26 @@ services:
       options:
         tag: wbc-nginx
     hostname: "nginx-docker-${HOST}"
+    labels:
+      traefik.enable: true
+      traefik.http.routers.wbc.tls.certresolver: letsencrypt
+      traefik.http.routers.wbc.rule: Host(`wbc.macbre.net`)
+      traefik.http.services.wbc.loadbalancer.server.port: "8080"
     depends_on:
     - app
     - sphinx
     restart: always
     healthcheck:
-      # wget -q 0.0.0.0:80/.well-known/acme-challenge/foo -O -
-      test: ["CMD", "wget", "0.0.0.0:8080/.well-known/acme-challenge/foo", "-q", "-O" ,"-", "-U", "wget/heathcheck"]
+      # wget -q 0.0.0.0:8080 --spider
+      test: ["CMD", "wget", "0.0.0.0:8080", "-q", "--spider", "-U", "wget/heathcheck"]
       interval: 15s
       timeout: 1s
       retries: 3
+
+
+# docker network create public-network
+networks:
+  default:
+    name: public-network
+    external: true
+
