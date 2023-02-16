@@ -11,7 +11,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'coverage==6.2',
-        'flask==2.0.2',
+        'flask==2.2.3',
         'Flask-Assets==2.0',
         'cssmin==0.2.0',
         'jsmin==3.0.0',
