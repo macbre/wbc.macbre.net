@@ -16,6 +16,9 @@ USER nobody
 COPY setup.py $HOME/setup.py
 RUN pip install -e .
 
+# update the PATH to point to pip's bin/ directory
+ENV PATH "$HOME/.local/bin/:$PATH"
+
 # copy the rest of the app to make use of Docker cache layers
 COPY . $HOME
 
