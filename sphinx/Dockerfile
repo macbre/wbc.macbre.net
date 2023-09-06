@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/manticoresearch/manticore
-FROM manticoresearch/manticore:3.5.4
+FROM manticoresearch/manticore:6.2.12
 
 # set up logs and indices directories
 RUN mkdir -pv /opt/sphinx/log /opt/sphinx/index
