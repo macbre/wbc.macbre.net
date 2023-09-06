@@ -68,7 +68,7 @@ def sitemap(sitemap_id):
     """
     return send_from_directory(directory=os.path.join(root_path, 'sitemap'),
                                path='sitemap-{}.xml'.format(sitemap_id),
-                               mimetype='text/xml', max_age=86400, add_etags=False)
+                               mimetype='text/xml', max_age=86400)
 
 
 # errors handling
