@@ -14,6 +14,7 @@ services:
       options:
         tag: wbc-sphinx
     hostname: sphinx-docker
+    restart: always
   # Flask app
   app:
     build:
@@ -30,6 +31,7 @@ services:
       options:
         tag: wbc-app
     hostname: "app-docker-${HOST}"
+    restart: always
   # nginx proxy
   nginx:
     # https://github.com/macbre/docker-nginx-http3/pkgs/container/nginx-http3
