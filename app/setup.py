@@ -10,7 +10,7 @@ setup(
     url='https://github.com/macbre/wbc.macbre.net',
     packages=find_packages(),
     install_requires=[
-        'coverage==7.4.4',
+        'coverage==7.5.4',
         'flask==3.0.3',
         'Flask-Assets==2.1.0',
         'cssmin==0.2.0',
