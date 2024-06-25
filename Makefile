@@ -7,13 +7,13 @@ stopwords:
 	cat stopwords.txt | docker-compose run app stopwords
 
 sitemap:
-	docker-compose run app sitemap
+	docker compose run app sitemap
 	curl 'http://google.com/ping?sitemap=http://wbc.macbre.net/sitemap.xml' -svo /dev/null
 
 start:
 	GIT_HASH=`git rev-parse HEAD` \
 	HOST=`hostname` \
-	docker-compose up -d
+	docker compose up -d
 
 stop:
 	docker-compose stop
