@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         python-version:
-        - '3.10'
+        - '3.12'
 
     steps:
     - uses: actions/checkout@v4
@@ -22,7 +22,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install wheel
+        pip install --upgrade pip
+        pip install wheel setuptools
         cd app && python setup.py install
 
     - name: Test with pytest
