@@ -22,7 +22,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install wheel
+        pip install --upgrade pip
+        pip install wheel setuptools
         cd app && python setup.py install
 
     - name: Test with pytest
