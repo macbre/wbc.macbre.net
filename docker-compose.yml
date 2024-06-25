@@ -52,7 +52,6 @@ services:
     hostname: "nginx-docker-${HOST}"
     labels:
       traefik.enable: true
-      traefik.http.routers.wbc.tls.certresolver: letsencrypt
       traefik.http.routers.wbc.rule: Host(`wbc.macbre.net`)
       traefik.http.services.wbc.loadbalancer.server.port: "8080"
     depends_on:
