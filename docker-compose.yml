@@ -1,4 +1,3 @@
-version: '2.4'
 services:
   sphinx:
     build:
@@ -35,7 +34,7 @@ services:
   # nginx proxy
   nginx:
     # https://github.com/macbre/docker-nginx-http3/pkgs/container/nginx-http3
-    image: ghcr.io/macbre/nginx-http3:latest
+    image: ghcr.io/macbre/nginx-http3:1.27.0
     volumes:
       # mount cache directory
       - ./nginx/cache:/var/nginx/cache
