@@ -1,8 +1,8 @@
 # wbc.macbre.net
 
-[![Build Status](https://travis-ci.org/macbre/wbc.macbre.net.svg?branch=master)](https://travis-ci.org/macbre/wbc.macbre.net)
+[![Build Status](https://github.com/macbre/wbc.macbre.net/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/macbre/wbc.macbre.net/actions/workflows/unit-tests.yml)
 
-[WBC archive](http://www.wbc.poznan.pl/dlibra) served via API and as a web fornt-end application.
+[WBC archive](http://www.wbc.poznan.pl/dlibra) served via HTTP API and as a web front-end application.
 
 ## Architecture
 
