@@ -15,7 +15,7 @@ setup(
         'Flask-Assets==2.1.0',
         'cssmin==0.2.0',
         'jsmin==3.0.1',
-        'gunicorn==22.0.0',
+        'gunicorn==23.0.0',
         'monolog-python==0.1.0',
         'PyMySQL==1.1.1',
         'pytest==8.3.2'
