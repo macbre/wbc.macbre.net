@@ -34,7 +34,7 @@ services:
   # nginx proxy
   nginx:
     # https://github.com/macbre/docker-nginx-http3/pkgs/container/nginx-http3
-    image: ghcr.io/macbre/nginx-http3:1.27.0
+    image: ghcr.io/macbre/nginx-http3:1.27.3
     volumes:
       # mount cache directory
       - ./nginx/cache:/var/nginx/cache
@@ -53,9 +53,6 @@ services:
       traefik.enable: true
       traefik.http.routers.wbc.rule: Host(`wbc.macbre.net`)
       traefik.http.services.wbc.loadbalancer.server.port: "8080"
-    depends_on:
-    - app
-    - sphinx
     restart: always
     healthcheck:
       # wget -q 0.0.0.0:8080 --spider
