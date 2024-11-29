@@ -1,19 +1,19 @@
 nginx
 =====
 
-## Setting up acme.sh
+SSL certificates are handled by Traefik, nginx gets plain HTTP requests.
+
+### Cache
+
+To use cache set the `cache/` directory ownership:
 
 ```
-curl https://get.acme.sh | sh
-acme.sh --register-account
-
-[Sat Jul  8 20:52:24 CEST 2017] ACCOUNT_THUMBPRINT='xxxx'
+sudo chown 100:101 cache/
 ```
 
-Put `ACCOUNT_THUMBPRINT` in `site.conf` file.
-
-## Renewing certificates
-
 ```
-acme.sh --stateless --issue -d wbc.macbre.net
+$ curl 'https://wbc.macbre.net/static/wbc.48212b50.min.css' --compressed -i  2>&1 | grep -iE 'cache|encoding'
+cache-control: public, max-age=31536000
+content-encoding: zstd
+x-cache: HIT
 ```
