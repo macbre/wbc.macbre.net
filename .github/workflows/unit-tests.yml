@@ -25,7 +25,7 @@ jobs:
         set -x
         pip install --upgrade pip
         pip install wheel setuptools
-        cd app && pip install
+        cd app && pip install .
 
     - name: Test with pytest
       run: cd app && make coverage
