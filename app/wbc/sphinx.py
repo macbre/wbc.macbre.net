@@ -94,7 +94,7 @@ class Sphinx(object):
         :rtype: list
         """
         res = self.query('SHOW TABLES')
-        return [row['Index'] for row in res]
+        return [row['Table'] for row in res]
 
     def get_meta(self):
         """
