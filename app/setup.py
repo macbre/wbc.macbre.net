@@ -11,13 +11,13 @@ setup(
     packages=find_packages(),
     install_requires=[
         'coverage==7.10.7',
-        'flask==3.1.1',
+        'flask==3.1.2',
         'Flask-Assets==2.1.0',
         'cssmin==0.2.0',
         'jsmin==3.0.1',
         'gunicorn==23.0.0',
         'monolog-python==0.1.0',
-        'PyMySQL==1.1.1',
+        'PyMySQL==1.1.2',
         'pytest==8.3.5'
     ],
     include_package_data=True,
