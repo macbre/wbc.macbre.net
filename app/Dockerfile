@@ -1,5 +1,5 @@
 # Dockerfile for Flask-app
-FROM python:3.14-alpine
+FROM python:3.15-alpine
 
 # set up the working directory
 WORKDIR /opt/app
